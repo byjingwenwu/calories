@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.0/css/bootstrap.css">
+  <link rel="stylesheet" href="../styles/style.css">
+  <title>CALORIE</title>
+</head>
+
+<body>
+  <div class="modal-overlay hidden" id="modalOverlay">
+    <div class="modal-content modal-dialog-scrollable" id="modalContent">
+      <div class="modal-title"></div>
+      <div class="modal-body"></div>
+      <div class="modal-button row justify-content-center">
+        <button type="button" class="btn btn-dark btnAdj btnModal" data-dismiss="modal" id="closeButton">Close</button>
+        <button type="button" class="btn btn-dark btnAdj btnModal">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <header>
+    <nav class="navbar navAdj">
+      <a class="navbar-brand brandLogo" href="../index.html">CAloRIE</a>
+      <ul class="nav justify-content-end">
+        <li class="nav-item">
+          <a class="nav-link active" href="../index.html">HoME</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">REceiPT</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="restaurant.html">RESTaurANT</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">LOGin/SIGNup</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="far fa-heart"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="fas fa-search"></i></a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="getContainer">
+      <div class="imageContainer col-4"></div>
+      <div class="receiptControl col-6">
+        <h1>Find Your Receipt</h1>
+        <h6>Search by Ingredients</h6>
+
+        <form class="searchIngredientForm" id="ingredientSearch">
+          <div class="form-group col-sm-5 groupAdj">
+            <label for="receipt-ingredient" class="sr-only">Ingredient</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-utensils"></i></span>
+              </div>
+              <input type="text" name="ingredient" class="form-control" id="receipt-ingredient"
+                placeholder="Ingredients">
+            </div>
+            <button type="submit" class="btn btn-dark btnAdj">Search</button>
+          </div>
+        </form>
+
+        <h6>Search by Name</h6>
+        <form class="searchMenuForm" id="nameSearch">
+          <div class="form-group col-sm-5 groupAdj">
+            <label for="receipt-name" class="sr-only">Name</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-hamburger"></i></span>
+              </div>
+              <input type="text" name="ingredient" class="form-control" id="receipt-name" placeholder="Name">
+            </div>
+            <button type="submit" class="btn btn-dark btnAdj">Search</button>
+          </div>
+        </form>
+
+        <form id="getRandomReceipt">
+          <h4 class="textDecoration">Not sure what to eat? Let me decide for you!</h4>
+          <button type="submit" class="btn btn-dark btnRandom" data-toggle="modal"
+            data-target="#exampleModalCenter">Random Receipt</button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footerAdj">
+    <div class="col-sm-2 text-right">
+      <h1 class="footerLogo">CAloRIE</h1>
+      <div class="footerLogoDec"></div>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+        pariatur.
+      </p>
+    </div>
+    <div class="col-sm-2 flex-column">
+      <h4>MENU</h4>
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="pages/receipt.html">REceipt</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="pages/restaurant.html">RESTaurANT</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="">SeaRCH</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="">CONtaCT Us</a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+  <script src="../components/config.js"></script>
+  <script src="../components/receipt/random-receipt.js"></script>
+  <script src="../components/receipt/receipt-result.js"></script>
+  <script src="../components/receipt/random-search-form.js"></script>
+  <script src="../components/receipt/main2.js"></script>
+</body>
+
+</html>
