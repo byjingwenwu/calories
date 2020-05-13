@@ -191,6 +191,10 @@ a:hover {
   padding: 25px 25px;
 }
 
+.modal-title {
+  border-bottom: 1px solid #5E6B73;
+}
+
 .modalImage {
   height: 100%;
   background-size: 100% auto;
@@ -204,6 +208,14 @@ a:hover {
   justify-content: space-between;
   align-items: flex-start;
 }
+
+.rightColumn {
+  display: flex;
+  flex-direction: column;
+  justify-content:flex-start;
+  align-items: flex-start;
+}
+
 
 .btnModal {
   margin: 5px 15px;
