@@ -1,21 +1,41 @@
+/* Main html Page*/
 .navAdj {
   padding-left: 5%;
   padding-right: 5%;
+}
+
+.brandLogo {
+  position: relative;
+  font-size: 35px;
+}
+
+.brandLogo::before {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 100%;
+  height: 15px;
+  background: rgba(94, 107, 115, 0.75);
+  content: "";
+  z-index: -1;
 }
 
 a{
   color: black;
 }
 
+a:hover {
+  color: #5E6B73;
+}
 
 .backgroundPic-1 {
-  background-image: url(../images/gettyimages-837188336-2048x2048.jpg);
-  background-size: contain;
+  background-image: url(../images/empty-plate-2.jpg);
+  background-size: cover;
 }
 
 .backgroundPic-2 {
-  background-image: url(../images/gettyimages-626625072-2048x2048.jpg);
-  background-size: contain;
+  background-image: url(../images/empty-plate-1.jpg);
+  background-size: cover;
 }
 
 .rowAdj {
@@ -34,21 +54,42 @@ a{
 }
 
 .btnAdj:hover {
-  background-color: rgb(156, 175, 183);
+  background-color: #5E6B73;
   border: 1px solid transparent;
   transition: ease-out 0.5s;
 }
 
 .footerAdj {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
   padding: 5% 0;
   margin-top: 5%;
   color: white;
   align-items: flex-start;
+  background-color: #5E6B73 ;
+}
+.footerLogo {
+  position: relative;
+  z-index: 2;
 }
 
-.searchBar {
-  background-image: url(../images/61-bread_16042018.jpg);
-  height: 50vh;
+.footerLogoDec {
+  position: absolute;
+  top: 5px;
+  right: 0px;
+  width: 44%;
+  height: 18px;
+  background:rgba(52, 58, 64, 0.75);
+  content: "";
+  z-index: 1;
+}
+
+/* Restaurant Page Setting*/
+.restaurantSearchBar {
+  background-image: url(../images/bread.jpg);
+  margin-top: 5%;
+  height: 60vh;
   background-size: cover;
   background-repeat: no-repeat;
   color: white;
@@ -75,4 +116,100 @@ a{
 
 .btn-link:hover {
   color: white;
+}
+
+/* Search Receipt Pages*/
+.getContainer {
+  display: flex;
+}
+
+.receiptControl {
+  display: flex;
+  flex-direction: column;
+  margin-left: 35px;
+}
+
+.imageContainer {
+  background-image: url(../images/lemon-chicken.jpg);
+  height: 60vh;
+  background-size: auto 100%;
+}
+
+.groupAdj {
+  display: flex;
+  padding: 0;
+}
+
+.textDecoration {
+  position: relative;
+}
+
+.textDecoration::before {
+  position: absolute;
+  top: 10px;
+  left: 25px;
+  width: 52%;
+  height: 10px;
+  background: rgba(94, 107, 115, 0.6);
+  content: "";
+  z-index: -1;
+}
+
+.btnRandom {
+  width: 150px;
+  transition: none;
+}
+
+.btnRandom:hover {
+  background-color: #5E6B73;
+  border: 1px solid transparent;
+  transition: ease-out 0.5s;
+}
+
+/* Modal*/
+.modal-overlay {
+  position: fixed;
+  z-index: 6;
+  background-color: rgba(94, 107, 115, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  width: 100%;
+}
+
+.modal-content {
+  background-color: white;
+  width: 65%;
+  height: 85%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 25px 25px;
+}
+
+.modalImage {
+  height: 100%;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+}
+
+.modal-body {
+  height: 70%;
+  overflow-y: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.btnModal {
+  margin: 5px 15px;
+}
+
+
+.hidden {
+  display: none;
 }
