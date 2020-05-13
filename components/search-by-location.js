@@ -1,7 +1,7 @@
 class SearchByLocation {
-  constructor(businessTable) {
+  constructor(businessTable, searchForm) {
     this.businessTable = businessTable;
-    // this.searchForm = searchForm;
+    this.searchForm = searchForm;
     this.searchRestaurant = this.searchRestaurant.bind(this);
     this.handleSearchSuccess = this.handleSearchSuccess.bind(this);
     this.handleSearchError = this.handleSearchError.bind(this);
@@ -9,24 +9,23 @@ class SearchByLocation {
 
   handleSearchSuccess(data) {
     this.businessTable.updateTable(data);
-    console.log(data.businesses);
   }
 
   handleSearchError(error) {
     console.log(error);
   }
 
-  searchRestaurant() {
+  searchRestaurant(location) {
     $.ajax({
       method: "GET",
       headers: { "Authorization": yelpApiKey },
-      url: yelpSearchLocationUrl,
+      url: yelpSearchLocationUrl + location,
       success: this.handleSearchSuccess,
       error: this.handleSearchError
     })
   }
 
   start() {
-    this.searchRestaurant();
+    this.searchForm.onSubmit(this.searchRestaurant);
   }
 }
