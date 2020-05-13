@@ -15,7 +15,7 @@
   <div class="modal-overlay hidden" id="modalOverlay">
     <div class="modal-content modal-dialog-scrollable" id="modalContent">
       <div class="modal-title"></div>
-      <div class="modal-body"></div>
+      <div id="modal-body"></div>
       <div class="modal-button row justify-content-center">
         <button type="button" class="btn btn-dark btnAdj btnModal" data-dismiss="modal" id="closeButton">Close</button>
         <button type="button" class="btn btn-dark btnAdj btnModal">Save</button>
@@ -64,7 +64,7 @@
                 <span class="input-group-text"><i class="fas fa-utensils"></i></span>
               </div>
               <input type="text" name="ingredient" class="form-control" id="receipt-ingredient"
-                placeholder="Ingredients">
+                placeholder="EX: chicken, onion">
             </div>
             <button type="submit" class="btn btn-dark btnAdj">Search</button>
           </div>
@@ -127,8 +127,9 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
   <script src="../components/config.js"></script>
-  <script src="../components/receipt/random-receipt.js"></script>
-  <script src="../components/receipt/receipt-result.js"></script>
+  <script src="../components/receipt/result.js"></script>
+  <script src="../components/receipt/receipt-modal.js"></script>
+  <script src="../components/receipt/search-ingredient-form.js"></script>
   <script src="../components/receipt/random-search-form.js"></script>
   <script src="../components/receipt/main2.js"></script>
 </body>
