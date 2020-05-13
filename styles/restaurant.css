@@ -1,0 +1,31 @@
+.searchBar {
+  background-image: url(../images/61-bread_16042018.jpg);
+  padding: 5% 0;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  color: white;
+  margin-top: 3%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.justifyForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0;
+}
+
+.btn-link {
+  color: white;
+}
+
+.btn-link > i {
+  margin-left: 10px;
+}
+
+.btn-link:hover {
+  color: white;
+}
