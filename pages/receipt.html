@@ -18,7 +18,7 @@
       <div id="modal-body"></div>
       <div class="modal-button row justify-content-center">
         <button type="button" class="btn btn-dark btnAdj btnModal" data-dismiss="modal" id="closeButton">Close</button>
-        <button type="button" class="btn btn-dark btnAdj btnModal">Save</button>
+        <button type="button" class="btn btn-dark btnAdj btnModal" id="save-more-button">Save</button>
       </div>
     </div>
   </div>
@@ -59,32 +59,52 @@
         <form class="searchIngredientForm" id="ingredientSearch">
           <div class="form-group col-sm-5 groupAdj">
             <label for="receipt-ingredient" class="sr-only">Ingredient</label>
-            <div class="input-group">
+            <div class="input-group groupMargin">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-utensils"></i></span>
               </div>
               <input type="text" name="ingredient" class="form-control" id="receipt-ingredient"
                 placeholder="EX: chicken, onion">
             </div>
-            <button type="submit" class="btn btn-dark btnAdj">Search</button>
+            <button type="submit" class="btn btn-dark">Search</button>
           </div>
         </form>
 
-        <h6>Search by Name</h6>
-        <form class="searchMenuForm" id="nameSearch">
-          <div class="form-group col-sm-5 groupAdj">
-            <label for="receipt-name" class="sr-only">Name</label>
-            <div class="input-group">
+        <h6>Search by Nutrients</h6>
+        <form class="searchMenuForm" id="nutrientSearch">
+          <div class="form-group col-9 groupAdj">
+            <label for="nutrient-name" class="sr-only">Nutrients</label>
+            <div class="input-group groupMargin">
               <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-hamburger"></i></span>
+                <span class="input-group-text"><i class="fab fa-nutritionix"></i></span>
               </div>
-              <input type="text" name="ingredient" class="form-control" id="receipt-name" placeholder="Name">
+              <input type="text" name="nutrient-name" class="form-control" id="nutrient-name" placeholder="VitaminC">
+            </div>
+
+            <label for="min-nutrient" class="sr-only">Minimum Nutruents</label>
+            <div class="input-group groupMargin">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-sort-amount-down"></i></span>
+              </div>
+              <input type="text" name="min-nutrient" class="form-control" id="min-nutrient" placeholder="Min Number">
+            </div>
+
+            <label for="max-nutrient" class="sr-only">Maximum Nutrients</label>
+            <div class="input-group groupMargin">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-sort-amount-up-alt"></i></span>
+              </div>
+              <input type="text" name="max-nutrient" class="form-control" id="max-nutrient" placeholder="Max Number">
             </div>
             <button type="submit" class="btn btn-dark btnAdj">Search</button>
           </div>
+
         </form>
 
-        <form id="getRandomReceipt">
+        <button type="button" class="btn btn-link btn-link-2">Advanced Search<i
+            class="fa fa-angle-double-right"></i></button>
+
+        <form id="getRandomReceipt" class="getRandomReceipt">
           <h4 class="textDecoration">Not sure what to eat? Let me decide for you!</h4>
           <button type="submit" class="btn btn-dark btnRandom" data-toggle="modal"
             data-target="#exampleModalCenter">Random Receipt</button>
@@ -130,6 +150,7 @@
   <script src="../components/receipt/result.js"></script>
   <script src="../components/receipt/receipt-modal.js"></script>
   <script src="../components/receipt/search-ingredient-form.js"></script>
+  <script src="../components/receipt/search-nutrients-form.js"></script>
   <script src="../components/receipt/random-search-form.js"></script>
   <script src="../components/receipt/main2.js"></script>
 </body>

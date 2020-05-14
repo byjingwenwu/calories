@@ -5,6 +5,7 @@ class Receipt {
 
   updateTable(data) {
     document.getElementById("modalOverlay").classList.remove("hidden");
+    document.getElementById("save-more-button").textContent = "Save";
     var titleElement = document.querySelector(".modal-title");
     var createTitle = document.createElement("h5");
     createTitle.textContent = data.recipes[0].title;
@@ -66,6 +67,7 @@ class Receipt {
 
   updateByIngredient(data) {
     document.getElementById("modalOverlay").classList.remove("hidden");
+    document.getElementById("save-more-button").textContent = "More";
     for (let i = 0; i < data.length; i++) {
       var bodyElement = document.querySelector("#modal-body");
       bodyElement.className = "modal-body"
@@ -119,6 +121,63 @@ class Receipt {
       }
     }
 
+    document.querySelector("#closeButton").addEventListener("click", function () {
+      document.getElementById("modalOverlay").className += " hidden";
+      document.querySelector(".modal-title").innerHTML = "";
+      document.querySelector("#modal-body").innerHTML = "";
+    })
+  }
+
+  updateByNutrient(data, name) {
+    document.getElementById("modalOverlay").classList.remove("hidden");
+    document.getElementById("save-more-button").textContent = "More";
+    for (let i = 0; i < data.length; i++) {
+      var bodyElement = document.querySelector("#modal-body");
+      bodyElement.className = "modal-body"
+      var rowElement = document.createElement("div");
+      rowElement.className = "modal-row";
+      bodyElement.appendChild(rowElement);
+
+      var titleElement = document.createElement("div");
+      titleElement.className = "modal-title";
+      var createTitle = document.createElement("h5");
+      createTitle.textContent = data[i].title;
+      titleElement.appendChild(createTitle);
+      rowElement.appendChild(titleElement);
+
+      var content = document.createElement("div");
+      content.className = "modal-result";
+      rowElement.appendChild(content);
+
+      var imgElement = document.createElement("div");
+      imgElement.setAttribute("style", "background-image: url(" + data[i].image + ");");
+      imgElement.setAttribute("id", "modalImage");
+      imgElement.className = "col-4 modalImage";
+      var rightColumn = document.createElement("div");
+      rightColumn.className = "rightColumn col-5";
+      content.append(imgElement, rightColumn);
+
+      var nutTitle = document.createElement("h6");
+      nutTitle.textContent = "Nutrition Facts";
+      rightColumn.appendChild(nutTitle);
+
+      for (var value in data[i]) {
+        if (value.toLowerCase() == name.toLowerCase()) {
+          var input = document.createElement("div");
+          input.textContent = name + ": " + data[i][value];
+        }
+      }
+      var calories = document.createElement("div");
+      calories.textContent = "Calories: " + data[i].calories
+      var carbs = document.createElement("div");
+      carbs.textContent = "Carbs: " + data[i].carbs;
+      var fat = document.createElement("div");
+      fat.textContent = "Fat: " + data[i].fat;
+      var protein = document.createElement("div");
+      protein.textContent = "Protein: " + data[i].protein;
+
+      rightColumn.append(input, calories, carbs, fat, protein)
+    }
     document.querySelector("#closeButton").addEventListener("click", function () {
       document.getElementById("modalOverlay").className += " hidden";
       document.querySelector(".modal-title").innerHTML = "";

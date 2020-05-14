@@ -63,7 +63,7 @@ a:hover {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding: 5% 0;
+  padding: 30px 0;
   margin-top: 5%;
   color: white;
   align-items: flex-start;
@@ -88,7 +88,7 @@ a:hover {
 /* Restaurant Page Setting*/
 .restaurantSearchBar {
   background-image: url(../images/bread.jpg);
-  margin-top: 5%;
+  margin-top: 30px;
   height: 60vh;
   background-size: cover;
   background-repeat: no-repeat;
@@ -106,7 +106,7 @@ a:hover {
   margin-bottom: 0;
 }
 
-.btn-link {
+.btn-link-1 {
   color: white;
 }
 
@@ -114,19 +114,24 @@ a:hover {
   margin-left: 10px;
 }
 
-.btn-link:hover {
+.btn-link-1:hover {
   color: white;
 }
 
 /* Search Receipt Pages*/
 .getContainer {
   display: flex;
+  margin-top: 30px;
 }
 
 .receiptControl {
   display: flex;
   flex-direction: column;
   margin-left: 35px;
+}
+
+.getRandomReceipt {
+  margin-top: 30px;
 }
 
 .imageContainer {
@@ -144,7 +149,21 @@ a:hover {
   position: relative;
 }
 
-.textDecoration::before {
+.groupMargin {
+  margin-right: 10px;
+}
+
+.btn-link-2 {
+  color: rgb(52, 58, 64);
+  text-align: left;
+  padding-left: 0;
+}
+
+.btn-link-2:hover {
+  color: #5E6B73;
+}
+
+/* .textDecoration::before {
   position: absolute;
   top: 10px;
   left: 25px;
@@ -153,7 +172,7 @@ a:hover {
   background: rgba(94, 107, 115, 0.6);
   content: "";
   z-index: -1;
-}
+} */
 
 .btnRandom {
   width: 150px;

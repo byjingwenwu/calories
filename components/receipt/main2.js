@@ -7,5 +7,8 @@ var newRandomForm = new RandomForm(myRandomForm);
 var myIngeredientForm = document.getElementById("ingredientSearch");
 var newIngeredientForm = new IngredientForm(myIngeredientForm);
 
-var newSearch = new Information(newReceiptTable, newRandomForm, newIngeredientForm);
+var myNutrientForm = document.getElementById("nutrientSearch");
+var newNutrientForm = new NutrientForm(myNutrientForm);
+
+var newSearch = new Information(newReceiptTable, newRandomForm, newIngeredientForm, newNutrientForm);
 newSearch.start();
