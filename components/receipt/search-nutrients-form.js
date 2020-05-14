@@ -11,18 +11,11 @@ class NutrientForm {
 
   handleNutrientSearch(event) {
     event.preventDefault();
-    var name;
-    var sel = document.getElementById("nutrient-name");
-    var opt;
-    for (var i = 0; i < sel.options.length; i++) {
-      var opt = sel.options[i];
-      if (opt.selected === true) {
-        break;
-      }
-    }
-    name = opt.value;
-    var min = document.getElementById("min-nutrient").value;
-    var max = document.getElementById("max-nutrient").value;
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    var name = formData.get("nutrient-name");
+    var min = formData.get("min-nutrient");
+    var max = formData.get("max-nutrient");
     this.nutrientSearch(name, min, max);
     event.target.reset();
   }

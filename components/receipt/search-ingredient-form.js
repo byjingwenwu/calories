@@ -11,7 +11,8 @@ class IngredientForm {
 
   handleIngredientSearch(event) {
     event.preventDefault();
-    var ing = document.getElementById("receipt-ingredient").value;
+    const formData = new FormData(event.currentTarget);
+    var ing = formData.get("ingredient");
     this.ingredientSearch(ing);
     event.target.reset();
   }
