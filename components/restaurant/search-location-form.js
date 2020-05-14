@@ -11,7 +11,8 @@ class SearchForm {
 
   handleSearch(event) {
     event.preventDefault();
-    var location = document.getElementById("search-location-input").value;
+    const formData = new FormData(event.currentTarget);
+    var location = formData.get("search-restaurant");
     this.searchRestaurant(location);
     event.target.reset();
   }
