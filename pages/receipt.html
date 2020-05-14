@@ -54,8 +54,8 @@
       <div class="imageContainer col-4"></div>
       <div class="receiptControl col-6">
         <h1>Find Your Receipt</h1>
-        <h6>Search by Ingredients</h6>
 
+        <h6>Search by Ingredients</h6>
         <form class="searchIngredientForm" id="ingredientSearch">
           <div class="form-group col-sm-5 groupAdj">
             <label for="receipt-ingredient" class="sr-only">Ingredient</label>
@@ -72,13 +72,51 @@
 
         <h6>Search by Nutrients</h6>
         <form class="searchMenuForm" id="nutrientSearch">
-          <div class="form-group col-9 groupAdj">
+          <div class="form-group col-10 groupAdj">
             <label for="nutrient-name" class="sr-only">Nutrients</label>
             <div class="input-group groupMargin">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fab fa-nutritionix"></i></span>
               </div>
-              <input type="text" name="nutrient-name" class="form-control" id="nutrient-name" placeholder="VitaminC">
+              <select name="nutrient-name" class="form-control" id="nutrient-name">
+                <option>Select Nutrients</option>
+                <option value="Alcohol">Alcohol</option>
+                <option value="Carbs">Carbs</option>
+                <option value="Calories">Calories</option>
+                <option value="Caffeine">Caffeine</option>
+                <option value="Copper">Copper</option>
+                <option value="Calcium">Calcium</option>
+                <option value="Choline">Choline</option>
+                <option value="Cholesterol">Cholesterol</option>
+                <option value="Fat">Fat</option>
+                <option value="Fiber">Fiber</option>
+                <option value="Folate">Folate</option>
+                <option value="FolicAcid">Folic Acid</option>
+                <option value="Fluoride">Fluoride</option>
+                <option value="Iodine">Iodine</option>
+                <option value="Iron">Iron</option>
+                <option value="Magnesium">Magnesium</option>
+                <option value="Manganese">Manganese</option>
+                <option value="Protein">Protein</option>
+                <option value="Phosphorus">Phosphorus</option>
+                <option value="Potassium">Potassium</option>
+                <option value="Selenium">Selenium</option>
+                <option value="Sodium">Sodium</option>
+                <option value="Sugar">Sugar</option>
+                <option value="SaturatedFat">Saturated Fat</option>
+                <option value="VitaminA">Vitamin A</option>
+                <option value="VitaminB1">Vitamin B1</option>
+                <option value="VitaminB2">Vitamin B2</option>
+                <option value="VitaminB3">Vitamin B3</option>
+                <option value="VitaminB5">Vitamin B5</option>
+                <option value="VitaminB6">Vitamin B6</option>
+                <option value="VitaminB12">Vitamin B12</option>
+                <option value="VitaminC">Vitamin C</option>
+                <option value="VitaminD">Vitamin D</option>
+                <option value="VitaminE">Vitamin E</option>
+                <option value="VitaminK">Vitamin K</option>
+                <option value="Zinc">Zinc</option>
+              </select>
             </div>
 
             <label for="min-nutrient" class="sr-only">Minimum Nutruents</label>
