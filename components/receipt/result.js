@@ -46,7 +46,7 @@ class Information {
   ingredientSearch(ing) {
     $.ajax({
       method: "GET",
-      url: "https://api.spoonacular.com/recipes/findByIngredients?" + spoonacularApiKey + "&ingredients=" + ing + "&number=5",
+      url: "https://api.spoonacular.com/recipes/findByIngredients?" + spoonacularApiKey + "&ingredients=" + ing + "&random=true&number=5",
       success: this.ingredientSearchSuccess,
       error: this.ingredientSearchError
     })

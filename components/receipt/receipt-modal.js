@@ -119,8 +119,13 @@ class Receipt {
         ingredients.textContent = ingArry[n].originalString;
         rightColumn.appendChild(ingredients);
       }
-    }
 
+      var goToReceipt = document.createElement("button");
+      goToReceipt.setAttribute("type", "button");
+      goToReceipt.className = "btn btn-link btn-link-2";
+      goToReceipt.innerHTML = 'Check Receipt<i class="fa fa-angle-double-right">';
+      rightColumn.appendChild(goToReceipt);
+    }
     document.querySelector("#closeButton").addEventListener("click", function () {
       document.getElementById("modalOverlay").className += " hidden";
       document.querySelector(".modal-title").innerHTML = "";
@@ -160,7 +165,6 @@ class Receipt {
       var nutTitle = document.createElement("h6");
       nutTitle.textContent = "Nutrition Facts";
       rightColumn.appendChild(nutTitle);
-
       for (var value in data[i]) {
         if (value.toLowerCase() == name.toLowerCase()) {
           var input = document.createElement("div");
@@ -176,7 +180,12 @@ class Receipt {
       var protein = document.createElement("div");
       protein.textContent = "Protein: " + data[i].protein;
 
-      rightColumn.append(input, calories, carbs, fat, protein)
+      var goToReceipt = document.createElement("button");
+      goToReceipt.setAttribute("type", "button");
+      goToReceipt.className = "btn btn-link btn-link-2";
+      goToReceipt.innerHTML = 'Check Receipt<i class="fa fa-angle-double-right">';
+
+      rightColumn.append(input, calories, carbs, fat, protein, goToReceipt)
     }
     document.querySelector("#closeButton").addEventListener("click", function () {
       document.getElementById("modalOverlay").className += " hidden";
