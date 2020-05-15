@@ -3,7 +3,7 @@ class Receipt {
     this.tableElement = tableElement;
   }
 
-  updateTable(data) {
+  updateRandomModal(data) {
     document.getElementById("modalOverlay").classList.remove("hidden");
     document.getElementById("save-more-button").textContent = "Save";
     var titleElement = document.querySelector(".modal-title");
@@ -125,6 +125,7 @@ class Receipt {
       goToReceipt.className = "btn btn-link btn-link-2";
       goToReceipt.innerHTML = 'Check Receipt<i class="fa fa-angle-double-right">';
       rightColumn.appendChild(goToReceipt);
+
     }
     document.querySelector("#closeButton").addEventListener("click", function () {
       document.getElementById("modalOverlay").className += " hidden";

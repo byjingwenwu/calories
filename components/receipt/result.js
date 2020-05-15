@@ -17,7 +17,7 @@ class Information {
   }
 
   handleRandomSearchSuccess(data) {
-    this.randomReciptTable.updateTable(data);
+    this.randomReciptTable.updateRandomModal(data);
     console.log(data);
   }
 
