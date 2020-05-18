@@ -1,4 +1,4 @@
-class Receipt {
+class Recipe {
   constructor(tableElement) {
     this.tableElement = tableElement;
   }
@@ -120,11 +120,11 @@ class Receipt {
         rightColumn.appendChild(ingredients);
       }
 
-      var goToReceipt = document.createElement("button");
-      goToReceipt.setAttribute("type", "button");
-      goToReceipt.className = "btn btn-link btn-link-2";
-      goToReceipt.innerHTML = 'Check Receipt<i class="fa fa-angle-double-right">';
-      rightColumn.appendChild(goToReceipt);
+      var goToRecipe = document.createElement("button");
+      goToRecipe.setAttribute("type", "button");
+      goToRecipe.className = "btn btn-link btn-link-2";
+      goToRecipe.innerHTML = 'Check Recipe<i class="fa fa-angle-double-right">';
+      rightColumn.appendChild(goToRecipe);
 
     }
     document.querySelector("#closeButton").addEventListener("click", function () {
@@ -181,12 +181,12 @@ class Receipt {
       var protein = document.createElement("div");
       protein.textContent = "Protein: " + data[i].protein;
 
-      var goToReceipt = document.createElement("button");
-      goToReceipt.setAttribute("type", "button");
-      goToReceipt.className = "btn btn-link btn-link-2";
-      goToReceipt.innerHTML = 'Check Receipt<i class="fa fa-angle-double-right">';
+      var goToRecipe = document.createElement("button");
+      goToRecipe.setAttribute("type", "button");
+      goToRecipe.className = "btn btn-link btn-link-2";
+      goToRecipe.innerHTML = 'Check Recipe<i class="fa fa-angle-double-right">';
 
-      rightColumn.append(input, calories, carbs, fat, protein, goToReceipt)
+      rightColumn.append(input, calories, carbs, fat, protein, goToRecipe)
     }
     document.querySelector("#closeButton").addEventListener("click", function () {
       document.getElementById("modalOverlay").className += " hidden";

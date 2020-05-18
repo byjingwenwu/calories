@@ -7,24 +7,30 @@
 .brandLogo {
   position: relative;
   font-size: 35px;
+  font-weight: 600;
+  color: black;
+}
+
+.brandLogo:hover {
+  color:black;
 }
 
 .brandLogo::before {
   position: absolute;
   top: 15px;
   left: 15px;
-  width: 100%;
+  width: 125px;
   height: 15px;
   background: rgba(94, 107, 115, 0.75);
   content: "";
   z-index: -1;
 }
 
-a{
+.nav-header {
   color: black;
 }
 
-a:hover {
+.nav-header:hover {
   color: #5E6B73;
 }
 
@@ -60,16 +66,15 @@ a:hover {
 }
 
 .footerAdj {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
   padding: 30px 0;
   margin-top: 5%;
   color: white;
-  align-items: flex-start;
   background-color: #5E6B73 ;
 }
+
 .footerLogo {
+  font-size: 35px;
+  font-weight: 600;
   position: relative;
   z-index: 2;
 }
@@ -77,12 +82,27 @@ a:hover {
 .footerLogoDec {
   position: absolute;
   top: 5px;
-  right: 0px;
-  width: 44%;
-  height: 18px;
+  right: -15px;
+  width: 125px;
+  height: 15px;
   background:rgba(52, 58, 64, 0.75);
   content: "";
   z-index: 1;
+}
+
+.footerText {
+  width: 16%;
+  position: relative;
+  margin-right: 50px;
+}
+
+.nav-footer {
+  color: white;
+  padding: 0.5rem 0;
+}
+
+.nav-footer:hover {
+  color: rgb(52, 58, 64);
 }
 
 /* Restaurant Page Setting*/
@@ -118,19 +138,19 @@ a:hover {
   color: white;
 }
 
-/* Search Receipt Pages*/
+/* Search Recipe Pages*/
 .getContainer {
   display: flex;
   margin-top: 30px;
 }
 
-.receiptControl {
+.recipeControl {
   display: flex;
   flex-direction: column;
   margin-left: 35px;
 }
 
-.getRandomReceipt {
+.getRandomRecipe {
   margin-top: 30px;
 }
 
@@ -162,17 +182,6 @@ a:hover {
 .btn-link-2:hover {
   color: #5E6B73;
 }
-
-/* .textDecoration::before {
-  position: absolute;
-  top: 10px;
-  left: 25px;
-  width: 52%;
-  height: 10px;
-  background: rgba(94, 107, 115, 0.6);
-  content: "";
-  z-index: -1;
-} */
 
 .btnRandom {
   width: 150px;
