@@ -28,22 +28,22 @@
       <a class="navbar-brand brandLogo" href="../index.html">CAloRIE</a>
       <ul class="nav justify-content-end">
         <li class="nav-item">
-          <a class="nav-link active" href="../index.html">HoME</a>
+          <a class="nav-link active nav-header" href="../index.html">HoME</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">REceiPT</a>
+          <a class="nav-link nav-header" href="#">REcIpE</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="restaurant.html">RESTaurANT</a>
+          <a class="nav-link nav-header" href="restaurant.html">RESTaurANT</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">LOGin/SIGNup</a>
+          <a class="nav-link nav-header" href="#">LOGin/SIGNup</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"><i class="far fa-heart"></i></a>
+          <a class="nav-link nav-header" href="#"><i class="far fa-heart"></i></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"><i class="fas fa-search"></i></a>
+          <a class="nav-link nav-header" href="#"><i class="fas fa-search"></i></a>
         </li>
       </ul>
     </nav>
@@ -52,18 +52,18 @@
   <main>
     <div class="getContainer">
       <div class="imageContainer col-4"></div>
-      <div class="receiptControl col-6">
-        <h1>Find Your Receipt</h1>
+      <div class="recipeControl col-6">
+        <h1>Find Your Recipes</h1>
 
         <h6>Search by Ingredients</h6>
         <form class="searchIngredientForm" id="ingredientSearch">
           <div class="form-group col-sm-5 groupAdj">
-            <label for="receipt-ingredient" class="sr-only">Ingredient</label>
+            <label for="recipe-ingredient" class="sr-only">Ingredient</label>
             <div class="input-group groupMargin">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-utensils"></i></span>
               </div>
-              <input type="text" name="ingredient" class="form-control" id="receipt-ingredient"
+              <input type="text" name="ingredient" class="form-control" id="recipe-ingredient"
                 placeholder="EX: chicken, onion">
             </div>
             <button type="submit" class="btn btn-dark">Search</button>
@@ -142,42 +142,42 @@
         <button type="button" class="btn btn-link btn-link-2">Advanced Search<i
             class="fa fa-angle-double-right"></i></button>
 
-        <form id="getRandomReceipt" class="getRandomReceipt">
+        <form id="getRandomRecipe" class="getRandomRecipe">
           <h4 class="textDecoration">Not sure what to eat? Let me decide for you!</h4>
           <button type="submit" class="btn btn-dark btnRandom" data-toggle="modal"
-            data-target="#exampleModalCenter">Random Receipt</button>
+            data-target="#exampleModalCenter">Random Recipe</button>
         </form>
       </div>
     </div>
   </main>
 
-  <footer class="footerAdj">
-    <div class="col-sm-2 text-right">
-      <h1 class="footerLogo">CAloRIE</h1>
-      <div class="footerLogoDec"></div>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-        pariatur.
-      </p>
+  <footer class="row justify-content-center align-items-baseline footerAdj">
+    <div class="footerText">
+      <h1 class="footerLogo text-right">CAloRIE</h1>
+      <div class="footerLogoDec "></div>
+      <p class="text-justify">"Eating with the fullest pleasure - pleasure, that is, that does not depend on ignorance - is perhaps the
+        profoundest
+        enactment of our connection with the world. In this pleasure we experience our dependence and our gratitude, for
+        we are
+        living in a mystery, from creatures we did not make and powers we cannot comprehend."</p>
     </div>
     <div class="col-sm-2 flex-column">
       <h4>MENU</h4>
       <ul class="nav flex-column">
         <li class="nav-item">
-          <a class="nav-link" href="#">Home</a>
+          <a class="nav-link nav-footer" href="../index.html">HoME</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="pages/receipt.html">REceipt</a>
+          <a class="nav-link nav-footer" href="#">REcIpE</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="pages/restaurant.html">RESTaurANT</a>
+          <a class="nav-link nav-footer" href="restaurant.html">RESTaurANT</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="">SeaRCH</a>
+          <a class="nav-link nav-footer" href="">SeaRCH</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="">CONtaCT Us</a>
+          <a class="nav-link nav-footer" href="">CONtaCT Us</a>
         </li>
       </ul>
     </div>
@@ -185,12 +185,12 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
   <script src="../components/config.js"></script>
-  <script src="../components/receipt/result.js"></script>
-  <script src="../components/receipt/receipt-modal.js"></script>
-  <script src="../components/receipt/search-ingredient-form.js"></script>
-  <script src="../components/receipt/search-nutrients-form.js"></script>
-  <script src="../components/receipt/random-search-form.js"></script>
-  <script src="../components/receipt/main2.js"></script>
+  <script src="../components/recipe/result.js"></script>
+  <script src="../components/recipe/recipe-modal.js"></script>
+  <script src="../components/recipe/search-ingredient-form.js"></script>
+  <script src="../components/recipe/search-nutrients-form.js"></script>
+  <script src="../components/recipe/random-search-form.js"></script>
+  <script src="../components/recipe/main2.js"></script>
 </body>
 
 </html>

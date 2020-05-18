@@ -1,13 +1,13 @@
 class Information {
-  constructor(randomReciptTable, randomSearchForm, searchByIngredientForm, searchByNutrientForm) {
-    this.randomReciptTable = randomReciptTable;
+  constructor(randomRecipeTable, randomSearchForm, searchByIngredientForm, searchByNutrientForm) {
+    this.randomRecipeTable = randomRecipeTable;
     this.randomSearchForm = randomSearchForm;
     this.searchByIngredientForm = searchByIngredientForm;
     this.searchByNutrientForm = searchByNutrientForm;
 
-    this.randomSearchReceipt = this.randomSearchReceipt.bind(this);
-    this.handleRandomSearchSuccess = this.handleRandomSearchSuccess.bind(this);
-    this.handleRandomSearchError = this.handleRandomSearchError.bind(this);
+    this.randomSearchRecipe = this.randomSearchRecipe.bind(this);
+    this.randomSearchSuccess = this.randomSearchSuccess.bind(this);
+    this.randomSearchError = this.randomSearchError.bind(this);
     this.ingredientSearch = this.ingredientSearch.bind(this);
     this.ingredientSearchSuccess = this.ingredientSearchSuccess.bind(this);
     this.ingredientSearchError = this.ingredientSearchError.bind(this);
@@ -16,27 +16,25 @@ class Information {
     this.nutrientSearchError = this.nutrientSearchError.bind(this);
   }
 
-  handleRandomSearchSuccess(data) {
-    this.randomReciptTable.updateRandomModal(data);
-    console.log(data);
+  randomSearchSuccess(data) {
+    this.randomRecipeTable.updateRandomModal(data);
   }
 
-  handleRandomSearchError(error) {
+  randomSearchError(error) {
     console.log(error)
   }
 
-  randomSearchReceipt() {
+  randomSearchRecipe() {
     $.ajax({
       method: "GET",
       url: "https://api.spoonacular.com/recipes/random?" + spoonacularApiKey + "&number=1",
-      success: this.handleRandomSearchSuccess,
-      error: this.handleRandomSearchError
+      success: this.randomSearchSuccess,
+      error: this.randomSearchError
     })
   }
 
   ingredientSearchSuccess(data) {
-    this.randomReciptTable.updateByIngredient(data);
-    console.log(data);
+    this.randomRecipeTable.updateByIngredient(data);
   }
 
   ingredientSearchError(error) {
@@ -53,8 +51,7 @@ class Information {
   }
 
   nutrientSearchSuccess(data, name) {
-    this.randomReciptTable.updateByNutrient(data, name);
-    console.log(data);
+    this.randomRecipeTable.updateByNutrient(data, name);
   }
 
   nutrientSearchError(error) {
@@ -71,7 +68,7 @@ class Information {
   }
 
   start() {
-    this.randomSearchForm.onSubmit(this.randomSearchReceipt);
+    this.randomSearchForm.onSubmit(this.randomSearchRecipe);
     this.searchByIngredientForm.onSubmit(this.ingredientSearch);
     this.searchByNutrientForm.onSubmit(this.nutrientSearch);
   }

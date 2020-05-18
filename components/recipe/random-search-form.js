@@ -5,13 +5,13 @@ class RandomForm {
     this.formElement.addEventListener("submit", this.handleRandomSearch)
   }
 
-  onSubmit(randomSearchReceipt) {
-    this.randomSearchReceipt = randomSearchReceipt;
+  onSubmit(randomSearchRecipe) {
+    this.randomSearchRecipe = randomSearchRecipe;
   }
 
   handleRandomSearch(event) {
     event.preventDefault();
-    this.randomSearchReceipt();
+    this.randomSearchRecipe();
     event.target.reset();
   }
 }
