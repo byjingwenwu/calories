@@ -126,7 +126,7 @@ class Recipe {
       goToRecipe.setAttribute("type", "button");
       goToRecipe.className = "btn btn-link btn-link-2";
       goToRecipe.innerHTML = 'Check Recipe<i class="fa fa-angle-double-right">';
-      goToRecipe.addEventListener("click",)
+      goToRecipe.addEventListener("click", )
       rightColumn.appendChild(goToRecipe);
     }
     document.querySelector("#closeButton").addEventListener("click", function () {

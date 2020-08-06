@@ -1,6 +1,6 @@
 class Information {
-  constructor(randomRecipeTable, randomSearchForm, searchByIngredientForm, searchByNutrientForm) {
-    this.randomRecipeTable = randomRecipeTable;
+  constructor(recipeResult, randomSearchForm, searchByIngredientForm, searchByNutrientForm) {
+    this.recipeResult = recipeResult;
     this.randomSearchForm = randomSearchForm;
     this.searchByIngredientForm = searchByIngredientForm;
     this.searchByNutrientForm = searchByNutrientForm;
@@ -13,14 +13,17 @@ class Information {
     this.nutrientSearch = this.nutrientSearch.bind(this);
     this.nutrientSearchSuccess = this.nutrientSearchSuccess.bind(this);
     this.nutrientSearchError = this.nutrientSearchError.bind(this);
+    this.getRecipeInfo = this.getRecipeInfo.bind(this);
+    this.getRecipeInfoSuccess = this.getRecipeInfoSuccess.bind(this);
+    this.getRecipeInfoError = this.getRecipeInfoError.bind(this)
   }
 
   randomSearchSuccess(data) {
-    this.randomRecipeTable.updateRandomModal(data);
+    this.recipeResult.updateRandomModal(data);
   }
 
   randomSearchError(error) {
-    console.log(error)
+    console.error(error)
   }
 
   randomSearchRecipe() {
@@ -33,12 +36,11 @@ class Information {
   }
 
   ingredientSearchSuccess(data) {
-    console.log(data)
-    this.randomRecipeTable.updateByIngredient(data);
+    this.recipeResult.updateByIngredient(data);
   }
 
   ingredientSearchError(error) {
-    console.log(error);
+    console.error(error);
   }
 
   ingredientSearch(ing) {
@@ -51,11 +53,11 @@ class Information {
   }
 
   nutrientSearchSuccess(data, name) {
-    this.randomRecipeTable.updateByNutrient(data, name);
+    this.recipeResult.updateByNutrient(data, name);
   }
 
   nutrientSearchError(error) {
-    console.log(error);
+    console.error(error);
   }
 
   nutrientSearch(name, min, max) {
@@ -70,10 +72,18 @@ class Information {
   getRecipeInfo(id) {
     $.ajax({
       method: "GET",
-      url: "https://api.spoonacular.com/recipes/" + spoonacularApiKey + "/"+ id +"/information?includeNutrition=false",
+      url: "https://api.spoonacular.com/recipes/" + id + "/information?" + spoonacularApiKey,
       success: (data) => this.getRecipeInfoSuccess(data),
       error: this.getRecipeInfoError
     })
+  }
+
+  getRecipeInfoSuccess(data) {
+    this.recipeResult.updateDetail(data);
+  }
+
+  getRecipeInfoError(error) {
+    console.error(error);
   }
 
   start() {
