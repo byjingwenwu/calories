@@ -66,6 +66,7 @@ class Recipe {
   }
 
   updateByIngredient(data) {
+    console.log(data)
     document.getElementById("modalOverlay").classList.remove("hidden");
     document.getElementById("save-more-button").textContent = "More";
     for (let i = 0; i < data.length; i++) {
@@ -121,11 +122,12 @@ class Recipe {
       }
 
       var goToRecipe = document.createElement("button");
+      var id = data[i].id;
       goToRecipe.setAttribute("type", "button");
       goToRecipe.className = "btn btn-link btn-link-2";
       goToRecipe.innerHTML = 'Check Recipe<i class="fa fa-angle-double-right">';
+      goToRecipe.addEventListener("click",)
       rightColumn.appendChild(goToRecipe);
-
     }
     document.querySelector("#closeButton").addEventListener("click", function () {
       document.getElementById("modalOverlay").className += " hidden";
