@@ -1,6 +1,6 @@
-class Information {
-  constructor(recipeResult, randomSearchForm, searchByIngredientForm, searchByNutrientForm) {
-    this.recipeResult = recipeResult;
+class App {
+  constructor(resultModal, randomSearchForm, searchByIngredientForm, searchByNutrientForm) {
+    this.resultModal = resultModal;
     this.randomSearchForm = randomSearchForm;
     this.searchByIngredientForm = searchByIngredientForm;
     this.searchByNutrientForm = searchByNutrientForm;
@@ -19,7 +19,7 @@ class Information {
   }
 
   randomSearchSuccess(data) {
-    this.recipeResult.updateRandomModal(data);
+    this.resultModal.updateRandomModal(data);
   }
 
   randomSearchError(error) {
@@ -36,7 +36,8 @@ class Information {
   }
 
   ingredientSearchSuccess(data) {
-    this.recipeResult.updateByIngredient(data);
+    this.resultModal.updateByIngredient(data);
+
   }
 
   ingredientSearchError(error) {
@@ -53,7 +54,7 @@ class Information {
   }
 
   nutrientSearchSuccess(data, name) {
-    this.recipeResult.updateByNutrient(data, name);
+    this.resultModal.updateByNutrient(data, name);
   }
 
   nutrientSearchError(error) {
@@ -79,7 +80,7 @@ class Information {
   }
 
   getRecipeInfoSuccess(data) {
-    this.recipeResult.updateDetail(data);
+    this.resultModal.updateDetail(data);
   }
 
   getRecipeInfoError(error) {
@@ -90,5 +91,6 @@ class Information {
     this.randomSearchForm.onSubmit(this.randomSearchRecipe);
     this.searchByIngredientForm.onSubmit(this.ingredientSearch);
     this.searchByNutrientForm.onSubmit(this.nutrientSearch);
+    this.resultModal.passGetRecipeInfo(this.getRecipeInfo);
   }
 }

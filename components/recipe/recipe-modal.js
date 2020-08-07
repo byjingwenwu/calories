@@ -1,6 +1,14 @@
-class Recipe {
-  constructor(tableElement) {
-    this.tableElement = tableElement;
+class Modal {
+  constructor(modalElement) {
+    this.modalElement = modalElement;
+  }
+
+  handleCheckRecipe(id) {
+    this.getRecipeInfo(id)
+  }
+
+  passGetRecipeInfo(getRecipeInfo) {
+    this.getRecipeInfo = getRecipeInfo
   }
 
   updateRandomModal(data) {
@@ -66,7 +74,6 @@ class Recipe {
   }
 
   updateByIngredient(data) {
-    console.log(data)
     document.getElementById("modalOverlay").classList.remove("hidden");
     document.getElementById("save-more-button").textContent = "More";
     for (let i = 0; i < data.length; i++) {
@@ -126,7 +133,7 @@ class Recipe {
       goToRecipe.setAttribute("type", "button");
       goToRecipe.className = "btn btn-link btn-link-2";
       goToRecipe.innerHTML = 'Check Recipe<i class="fa fa-angle-double-right">';
-      goToRecipe.addEventListener("click", )
+      goToRecipe.addEventListener("click", this.handleCheckRecipe.bind(this, id))
       rightColumn.appendChild(goToRecipe);
     }
     document.querySelector("#closeButton").addEventListener("click", function () {
@@ -195,5 +202,9 @@ class Recipe {
       document.querySelector(".modal-title").innerHTML = "";
       document.querySelector("#modal-body").innerHTML = "";
     })
+  }
+
+  updateDetail(data) {
+    console.log("success:", data)
   }
 }

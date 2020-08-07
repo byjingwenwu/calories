@@ -1,5 +1,5 @@
-var myRecipeTable = document.getElementById("modalContent");
-var newRecipeTable = new Recipe(myRecipeTable);
+var myRecipeModal = document.getElementById("modalContent");
+var newRecipeModal = new Modal(myRecipeModal);
 
 var myRandomForm = document.getElementById("getRandomRecipe");
 var newRandomForm = new RandomForm(myRandomForm);
@@ -10,5 +10,5 @@ var newIngeredientForm = new IngredientForm(myIngeredientForm);
 var myNutrientForm = document.getElementById("nutrientSearch");
 var newNutrientForm = new NutrientForm(myNutrientForm);
 
-var newSearch = new Information(newRecipeTable, newRandomForm, newIngeredientForm, newNutrientForm);
+var newSearch = new App(newRecipeModal, newRandomForm, newIngeredientForm, newNutrientForm);
 newSearch.start();
