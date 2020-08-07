@@ -191,10 +191,11 @@ class Modal {
       protein.textContent = "Protein: " + data[i].protein;
 
       var goToRecipe = document.createElement("button");
+      var id = data[i].id;
       goToRecipe.setAttribute("type", "button");
       goToRecipe.className = "btn btn-link btn-link-2";
       goToRecipe.innerHTML = 'Check Recipe<i class="fa fa-angle-double-right">';
-
+      goToRecipe.addEventListener("click", this.handleCheckRecipe.bind(this, id))
       rightColumn.append(input, calories, carbs, fat, protein, goToRecipe)
     }
     document.querySelector("#closeButton").addEventListener("click", function () {
