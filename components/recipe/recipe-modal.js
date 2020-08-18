@@ -90,7 +90,6 @@ class Modal {
   }
 
   updateByNutrient(data, name) {
-    console.log(data)
     document.querySelector(".close").addEventListener("click", function () {
       document.querySelector("#modal-body").innerHTML = "";
     })
@@ -162,10 +161,14 @@ class Modal {
   updateRandomModal(data) {
     document.querySelector(".close").addEventListener("click", function () {
       document.querySelector("#modal-body").innerHTML = "";
+      document.querySelector("#recipeModalTitle").textContent = "Search Result"
+      document.querySelector("#modal-body").className = "mx-4 mb-4"
     })
 
     document.querySelector("#closeModal").addEventListener("click", function () {
       document.querySelector("#modal-body").innerHTML = "";
+      document.querySelector("#recipeModalTitle").textContent = "Search Result"
+      document.querySelector("#modal-body").className = "mx-4 mb-4"
     })
 
     var titleElement = document.querySelector("#recipeModalTitle");
