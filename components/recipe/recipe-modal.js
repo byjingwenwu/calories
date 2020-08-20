@@ -12,14 +12,6 @@ class Modal {
   }
 
   updateByIngredient(data) {
-    document.querySelector(".close").addEventListener("click", function () {
-      document.querySelector("#modal-body").innerHTML = "";
-    })
-
-    document.querySelector("#closeModal").addEventListener("click", function () {
-      document.querySelector("#modal-body").innerHTML = "";
-    })
-
     if (!data.length) {
       var bodyElement = document.querySelector("#modal-body");
       var text = document.createElement("h5");
@@ -87,17 +79,16 @@ class Modal {
       goToRecipe.addEventListener("click", this.handleCheckRecipe.bind(this, id))
       rightColumn.appendChild(goToRecipe);
     }
+    document.querySelector("#closeModal").addEventListener("click", function () {
+      bodyElement.innerHTML = "";
+    })
+    document.querySelector(".close").addEventListener("click", function () {
+      bodyElement.innerHTML = "";
+    })
   }
 
   updateByNutrient(data, name) {
-    document.querySelector(".close").addEventListener("click", function () {
-      document.querySelector("#modal-body").innerHTML = "";
-    })
-
-    document.querySelector("#closeModal").addEventListener("click", function () {
-      document.querySelector("#modal-body").innerHTML = "";
-    })
-
+    console.log(data)
     if (!data.length) {
       var bodyElement = document.querySelector("#modal-body");
       var text = document.createElement("h5");
@@ -156,21 +147,16 @@ class Modal {
       goToRecipe.addEventListener("click", this.handleCheckRecipe.bind(this, id))
       rightColumn.append(input, calories, carbs, fat, protein, goToRecipe)
     }
+    document.querySelector("#closeModal").addEventListener("click", function () {
+      bodyElement.innerHTML = "";
+    })
+    document.querySelector(".close").addEventListener("click", function () {
+      bodyElement.innerHTML = "";
+    })
   }
 
   updateRandomModal(data) {
-    document.querySelector(".close").addEventListener("click", function () {
-      document.querySelector("#modal-body").innerHTML = "";
-      document.querySelector("#recipeModalTitle").textContent = "Search Result"
-      document.querySelector("#modal-body").className = "mx-4 mb-4"
-    })
-
-    document.querySelector("#closeModal").addEventListener("click", function () {
-      document.querySelector("#modal-body").innerHTML = "";
-      document.querySelector("#recipeModalTitle").textContent = "Search Result"
-      document.querySelector("#modal-body").className = "mx-4 mb-4"
-    })
-
+    console.log(data)
     var titleElement = document.querySelector("#recipeModalTitle");
     titleElement.textContent = data.recipes[0].title;
 
@@ -195,7 +181,7 @@ class Modal {
     }
 
     var summaryTitle = document.createElement("h6");
-    summaryTitle.textContent = "Summary";
+    summaryTitle.textContent = "Summary:";
     var summaryElement = document.createElement("div");
     summaryElement.innerHTML = data.recipes[0].summary;
     var cookingTime = document.createElement("h6");
@@ -205,23 +191,107 @@ class Modal {
     rightColumn.append(summaryTitle, summaryElement, cookingTime, serveSize);
 
     var ingredientsTitle = document.createElement("h6");
-    ingredientsTitle.textContent = "Ingresients";
-    rightColumn.appendChild(ingredientsTitle);
-    var extendedIngredients = data.recipes[0].extendedIngredients;
-    for (let i = 0; i < extendedIngredients.length; i++) {
-      var ingredients = document.createElement("p");
-      ingredients.textContent = extendedIngredients[i].original;
-      rightColumn.appendChild(ingredients);
+    ingredientsTitle.textContent = "Ingresients:";
+    var extendedIngredients = document.createElement("ul");
+    for (let i = 0; i < data.recipes[0].extendedIngredients.length; i++) {
+      var ingredients = document.createElement("li");
+      ingredients.textContent = data.recipes[0].extendedIngredients[i].original;
+      extendedIngredients.appendChild(ingredients);
+    }
+    rightColumn.append(ingredientsTitle,extendedIngredients);
+
+    if (data.recipes[0].analyzedInstructions.length) {
+      var instructionTitle = document.createElement("h6")
+      instructionTitle.textContent = "Instruction:"
+      var instructions = document.createElement("ol")
+      for (let i = 0; i < data.recipes[0].analyzedInstructions.length; i++) {
+        data.recipes[0].analyzedInstructions[i].steps.map(x => {
+          var item = document.createElement("li")
+          item.textContent = x.step
+          instructions.appendChild(item)
+        })
+      }
+      rightColumn.append(instructionTitle, instructions);
+    } else {
+      var noInstruction = document.createElement("div")
+      noInstruction.textContent = "No detailed instruction provided."
+      rightColumn.append(noInstruction)
     }
 
-    var instructionTitle = document.createElement("h6");
-    instructionTitle.textContent = "Instruction";
-    var instructionElement = document.createElement("div");
-    instructionElement.innerHTML = data.recipes[0].instructions;
-    rightColumn.append(instructionTitle, instructionElement);
+    document.querySelector("#closeModal").addEventListener("click", function () {
+      bodyElement.innerHTML = "";
+      bodyElement.className = "mx-4 mb-4";
+      titleElement.textContent = "Search Result"
+    })
+
+    document.querySelector(".close").addEventListener("click", function () {
+      bodyElement.innerHTML = "";
+      bodyElement.className = "mx-4 mb-4";
+      titleElement.textContent = "Search Result"
+    })
   }
 
   updateDetail(data) {
-    console.log("success:", data)
+    console.log(data)
+    document.querySelector("#modal-body").innerHTML = "";
+
+    var titleElement = document.querySelector("#recipeModalTitle");
+    titleElement.textContent = data.title;
+
+    var bodyElement = document.querySelector("#modal-body");
+    bodyElement.className += " mt-4"
+    var picture = document.createElement("img");
+    picture.setAttribute("src", data.image)
+    var cookingTime = document.createElement("h6");
+    cookingTime.textContent = "Ready in Minutes: " + data.readyInMinutes + " min.";
+    var serveSize = document.createElement("h6");
+    serveSize.textContent = "Servings: " + data.servings;
+    var dishType = document.createElement("h6");
+    dishType.textContent = "Dish Type: " + data.dishTypes[0];
+    var summaryTitle = document.createElement("h6");
+    summaryTitle.textContent = "Summary:";
+    var summaryElement = document.createElement("div");
+    summaryElement.innerHTML = data.summary;
+    var extendedTitle = document.createElement("h6");
+    extendedTitle.textContent = "Extend Ingredients:";
+    var extendedIngredients = document.createElement("ul");
+    for (let i = 0; i < data.extendedIngredients.length; i++) {
+      var ingredients = document.createElement("li");
+      ingredients.textContent = data.extendedIngredients[i].original;
+      extendedIngredients.append(ingredients)
+    }
+
+    bodyElement.append(picture, cookingTime, serveSize, dishType, summaryTitle, summaryElement,
+      extendedTitle, extendedIngredients)
+
+    if (data.analyzedInstructions.length) {
+      var instructionTitle = document.createElement("h6")
+      instructionTitle.textContent = "Instruction:"
+      var instructions = document.createElement("ol")
+      for (let i = 0; i < data.analyzedInstructions.length; i++) {
+        data.analyzedInstructions[i].steps.map(x => {
+          var item = document.createElement("li")
+          item.textContent = x.step
+          instructions.appendChild(item)
+        })
+      }
+      bodyElement.append(instructionTitle, instructions)
+    } else {
+      var noInstruction = document.createElement("div")
+      noInstruction.textContent = "No detailed instruction provided."
+      bodyElement.append(noInstruction)
+    }
+
+    document.querySelector("#closeModal").addEventListener("click", function () {
+      bodyElement.innerHTML = "";
+      bodyElement.className = "mx-4 mb-4";
+      titleElement.textContent = "Search Result"
+    })
+
+    document.querySelector(".close").addEventListener("click", function () {
+      bodyElement.innerHTML = "";
+      bodyElement.className = "mx-4 mb-4";
+      titleElement.textContent = "Search Result"
+    })
   }
 }
