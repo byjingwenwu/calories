@@ -1,6 +1,7 @@
 class Modal {
   constructor(modalElement) {
     this.modalElement = modalElement;
+    this.handleMoreRecipe =this.handleMoreRecipe.bind(this)
   }
 
   handleCheckRecipe(id) {
@@ -9,6 +10,16 @@ class Modal {
 
   passGetRecipeInfo(getRecipeInfo) {
     this.getRecipeInfo = getRecipeInfo
+  }
+
+  handleMoreRecipe() {
+    document.querySelector("#modal-body").innerHTML = ""
+    document.querySelector("#modal-body").className = "mx-4 mb-4"
+    this.randomSearchRecipe()
+  }
+
+  passGetMoreRecipe(randomSearchRecipe) {
+    this.randomSearchRecipe = randomSearchRecipe
   }
 
   updateByIngredient(data) {
@@ -156,12 +167,11 @@ class Modal {
   }
 
   updateRandomModal(data) {
-    console.log(data)
     var titleElement = document.querySelector("#recipeModalTitle");
     titleElement.textContent = data.recipes[0].title;
 
     var bodyElement = document.querySelector("#modal-body");
-    bodyElement.className += " d-flex justify-content-between align-items-start mt-3"
+    bodyElement.className = "mx-4 mb-4 d-flex justify-content-between align-items-start mt-3"
     var imgElement = document.createElement("img");
     imgElement.setAttribute("src", data.recipes[0].image);
     imgElement.className = "col-5 recipe-img";
@@ -198,7 +208,7 @@ class Modal {
       ingredients.textContent = data.recipes[0].extendedIngredients[i].original;
       extendedIngredients.appendChild(ingredients);
     }
-    rightColumn.append(ingredientsTitle,extendedIngredients);
+    rightColumn.append(ingredientsTitle, extendedIngredients);
 
     if (data.recipes[0].analyzedInstructions.length) {
       var instructionTitle = document.createElement("h6")
@@ -217,6 +227,8 @@ class Modal {
       noInstruction.textContent = "No detailed instruction provided."
       rightColumn.append(noInstruction)
     }
+
+    document.querySelector("#moreButton").addEventListener("click", this.handleMoreRecipe)
 
     document.querySelector("#closeModal").addEventListener("click", function () {
       bodyElement.innerHTML = "";
