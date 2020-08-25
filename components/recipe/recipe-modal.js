@@ -99,7 +99,6 @@ class Modal {
   }
 
   updateByNutrient(data, name) {
-    console.log(data)
     if (!data.length) {
       var bodyElement = document.querySelector("#modal-body");
       var text = document.createElement("h5");
@@ -180,6 +179,7 @@ class Modal {
     bodyElement.append(imgElement, rightColumn);
 
     var cuisineTitle = document.createElement("h6");
+    cuisineTitle.className = "theme-color"
     var cusines = data.recipes[0].cuisines;
     var cusinesName = "";
     for (let i = 0; i < cusines.length; i++) {
@@ -191,16 +191,20 @@ class Modal {
     }
 
     var summaryTitle = document.createElement("h6");
+    summaryTitle.className = "theme-color mt-2"
     summaryTitle.textContent = "Summary:";
     var summaryElement = document.createElement("div");
     summaryElement.innerHTML = data.recipes[0].summary;
     var cookingTime = document.createElement("h6");
+    cookingTime.className = "theme-color mt-2"
     cookingTime.textContent = "Ready in Minutes: " + data.recipes[0].readyInMinutes + " min.";
     var serveSize = document.createElement("h6");
+    serveSize.className = "theme-color mt-2";
     serveSize.textContent = "Servings: " + data.recipes[0].servings;
     rightColumn.append(summaryTitle, summaryElement, cookingTime, serveSize);
 
     var ingredientsTitle = document.createElement("h6");
+    ingredientsTitle.className = "theme-color mt-2";
     ingredientsTitle.textContent = "Ingresients:";
     var extendedIngredients = document.createElement("ul");
     for (let i = 0; i < data.recipes[0].extendedIngredients.length; i++) {
@@ -212,6 +216,7 @@ class Modal {
 
     if (data.recipes[0].analyzedInstructions.length) {
       var instructionTitle = document.createElement("h6")
+      instructionTitle.className = "theme-color"
       instructionTitle.textContent = "Instruction:"
       var instructions = document.createElement("ol")
       for (let i = 0; i < data.recipes[0].analyzedInstructions.length; i++) {
@@ -244,27 +249,34 @@ class Modal {
   }
 
   updateDetail(data) {
-    console.log(data)
     document.querySelector("#modal-body").innerHTML = "";
 
     var titleElement = document.querySelector("#recipeModalTitle");
     titleElement.textContent = data.title;
 
     var bodyElement = document.querySelector("#modal-body");
-    bodyElement.className += " mt-4"
+    var bodyContent = document.createElement("div")
+    bodyContent.className ="col-12 mt-4"
+    bodyElement.appendChild(bodyContent)
+
     var picture = document.createElement("img");
     picture.setAttribute("src", data.image)
     var cookingTime = document.createElement("h6");
+    cookingTime.className = "theme-color mt-3"
     cookingTime.textContent = "Ready in Minutes: " + data.readyInMinutes + " min.";
     var serveSize = document.createElement("h6");
+    serveSize.className = "theme-color mt-3"
     serveSize.textContent = "Servings: " + data.servings;
     var dishType = document.createElement("h6");
+    dishType.className = "theme-color mt-3"
     dishType.textContent = "Dish Type: " + data.dishTypes[0];
     var summaryTitle = document.createElement("h6");
+    summaryTitle.className = "theme-color mt-3"
     summaryTitle.textContent = "Summary:";
     var summaryElement = document.createElement("div");
     summaryElement.innerHTML = data.summary;
     var extendedTitle = document.createElement("h6");
+    extendedTitle.className = "theme-color mt-3"
     extendedTitle.textContent = "Extend Ingredients:";
     var extendedIngredients = document.createElement("ul");
     for (let i = 0; i < data.extendedIngredients.length; i++) {
@@ -273,11 +285,12 @@ class Modal {
       extendedIngredients.append(ingredients)
     }
 
-    bodyElement.append(picture, cookingTime, serveSize, dishType, summaryTitle, summaryElement,
+    bodyContent.append(picture, cookingTime, serveSize, dishType, summaryTitle, summaryElement,
       extendedTitle, extendedIngredients)
 
     if (data.analyzedInstructions.length) {
       var instructionTitle = document.createElement("h6")
+      instructionTitle.className = "theme-color mt-3"
       instructionTitle.textContent = "Instruction:"
       var instructions = document.createElement("ol")
       for (let i = 0; i < data.analyzedInstructions.length; i++) {
@@ -287,11 +300,11 @@ class Modal {
           instructions.appendChild(item)
         })
       }
-      bodyElement.append(instructionTitle, instructions)
+      bodyContent.append(instructionTitle, instructions)
     } else {
       var noInstruction = document.createElement("div")
       noInstruction.textContent = "No detailed instruction provided."
-      bodyElement.append(noInstruction)
+      bodyContent.append(noInstruction)
     }
 
     document.querySelector("#closeModal").addEventListener("click", function () {
