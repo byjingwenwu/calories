@@ -1,6 +1,7 @@
 class Modal {
   constructor(modalElement) {
     this.modalElement = modalElement;
+    this.handleMoreRecipe =this.handleMoreRecipe.bind(this)
   }
 
   handleCheckRecipe(id) {
@@ -11,17 +12,26 @@ class Modal {
     this.getRecipeInfo = getRecipeInfo
   }
 
-  updateByIngredient(data) {
-    document.querySelector(".close").addEventListener("click", function () {
-      document.querySelector("#modal-body").innerHTML = "";
-    })
+  handleMoreRecipe() {
+    document.querySelector("#modal-body").innerHTML = ""
+    document.querySelector("#modal-body").className = "mx-4 mb-4"
+    this.randomSearchRecipe()
+  }
 
+  passGetMoreRecipe(randomSearchRecipe) {
+    this.randomSearchRecipe = randomSearchRecipe
+  }
+
+  updateByIngredient(data) {
+    var bodyElement = document.querySelector("#modal-body");
     document.querySelector("#closeModal").addEventListener("click", function () {
-      document.querySelector("#modal-body").innerHTML = "";
+      bodyElement.innerHTML = "";
+    })
+    document.querySelector(".close").addEventListener("click", function () {
+      bodyElement.innerHTML = "";
     })
 
     if (!data.length) {
-      var bodyElement = document.querySelector("#modal-body");
       var text = document.createElement("h5");
       text.textContent = "No result found.";
       text.className = "mt-4"
@@ -30,7 +40,6 @@ class Modal {
     }
 
     for (let i = 0; i < data.length; i++) {
-      var bodyElement = document.querySelector("#modal-body");
       var rowElement = document.createElement("div");
       rowElement.className = "modal-row mt-4";
       bodyElement.appendChild(rowElement);
@@ -90,16 +99,15 @@ class Modal {
   }
 
   updateByNutrient(data, name) {
-    document.querySelector(".close").addEventListener("click", function () {
-      document.querySelector("#modal-body").innerHTML = "";
-    })
-
+    var bodyElement = document.querySelector("#modal-body");
     document.querySelector("#closeModal").addEventListener("click", function () {
-      document.querySelector("#modal-body").innerHTML = "";
+      bodyElement.innerHTML = "";
+    })
+    document.querySelector(".close").addEventListener("click", function () {
+      bodyElement.innerHTML = "";
     })
 
     if (!data.length) {
-      var bodyElement = document.querySelector("#modal-body");
       var text = document.createElement("h5");
       text.textContent = "No result found.";
       bodyElement.appendChild(text);
@@ -107,7 +115,6 @@ class Modal {
     }
 
     for (let i = 0; i < data.length; i++) {
-      var bodyElement = document.querySelector("#modal-body");
       var rowElement = document.createElement("div");
       rowElement.className = "modal-row mt-4";
       bodyElement.appendChild(rowElement);
@@ -159,23 +166,11 @@ class Modal {
   }
 
   updateRandomModal(data) {
-    document.querySelector(".close").addEventListener("click", function () {
-      document.querySelector("#modal-body").innerHTML = "";
-      document.querySelector("#recipeModalTitle").textContent = "Search Result"
-      document.querySelector("#modal-body").className = "mx-4 mb-4"
-    })
-
-    document.querySelector("#closeModal").addEventListener("click", function () {
-      document.querySelector("#modal-body").innerHTML = "";
-      document.querySelector("#recipeModalTitle").textContent = "Search Result"
-      document.querySelector("#modal-body").className = "mx-4 mb-4"
-    })
-
     var titleElement = document.querySelector("#recipeModalTitle");
     titleElement.textContent = data.recipes[0].title;
 
     var bodyElement = document.querySelector("#modal-body");
-    bodyElement.className += " d-flex justify-content-between align-items-start mt-3"
+    bodyElement.className = "mx-4 mb-4 d-flex justify-content-between align-items-start mt-3"
     var imgElement = document.createElement("img");
     imgElement.setAttribute("src", data.recipes[0].image);
     imgElement.className = "col-5 recipe-img";
@@ -184,6 +179,7 @@ class Modal {
     bodyElement.append(imgElement, rightColumn);
 
     var cuisineTitle = document.createElement("h6");
+    cuisineTitle.className = "theme-color"
     var cusines = data.recipes[0].cuisines;
     var cusinesName = "";
     for (let i = 0; i < cusines.length; i++) {
@@ -195,33 +191,132 @@ class Modal {
     }
 
     var summaryTitle = document.createElement("h6");
-    summaryTitle.textContent = "Summary";
+    summaryTitle.className = "theme-color mt-2"
+    summaryTitle.textContent = "Summary:";
     var summaryElement = document.createElement("div");
     summaryElement.innerHTML = data.recipes[0].summary;
     var cookingTime = document.createElement("h6");
+    cookingTime.className = "theme-color mt-2"
     cookingTime.textContent = "Ready in Minutes: " + data.recipes[0].readyInMinutes + " min.";
     var serveSize = document.createElement("h6");
+    serveSize.className = "theme-color mt-2";
     serveSize.textContent = "Servings: " + data.recipes[0].servings;
     rightColumn.append(summaryTitle, summaryElement, cookingTime, serveSize);
 
     var ingredientsTitle = document.createElement("h6");
-    ingredientsTitle.textContent = "Ingresients";
-    rightColumn.appendChild(ingredientsTitle);
-    var extendedIngredients = data.recipes[0].extendedIngredients;
-    for (let i = 0; i < extendedIngredients.length; i++) {
-      var ingredients = document.createElement("p");
-      ingredients.textContent = extendedIngredients[i].original;
-      rightColumn.appendChild(ingredients);
+    ingredientsTitle.className = "theme-color mt-2";
+    ingredientsTitle.textContent = "Ingresients:";
+    var extendedIngredients = document.createElement("ul");
+    for (let i = 0; i < data.recipes[0].extendedIngredients.length; i++) {
+      var ingredients = document.createElement("li");
+      ingredients.textContent = data.recipes[0].extendedIngredients[i].original;
+      extendedIngredients.appendChild(ingredients);
+    }
+    rightColumn.append(ingredientsTitle, extendedIngredients);
+
+    if (data.recipes[0].analyzedInstructions.length) {
+      var instructionTitle = document.createElement("h6")
+      instructionTitle.className = "theme-color"
+      instructionTitle.textContent = "Instruction:"
+      var instructions = document.createElement("ol")
+      for (let i = 0; i < data.recipes[0].analyzedInstructions.length; i++) {
+        data.recipes[0].analyzedInstructions[i].steps.map(x => {
+          var item = document.createElement("li")
+          item.textContent = x.step
+          instructions.appendChild(item)
+        })
+      }
+      rightColumn.append(instructionTitle, instructions);
+    } else {
+      var noInstruction = document.createElement("div")
+      noInstruction.textContent = "No detailed instruction provided."
+      rightColumn.append(noInstruction)
     }
 
-    var instructionTitle = document.createElement("h6");
-    instructionTitle.textContent = "Instruction";
-    var instructionElement = document.createElement("div");
-    instructionElement.innerHTML = data.recipes[0].instructions;
-    rightColumn.append(instructionTitle, instructionElement);
+    document.querySelector("#moreButton").addEventListener("click", this.handleMoreRecipe)
+
+    document.querySelector("#closeModal").addEventListener("click", function () {
+      bodyElement.innerHTML = "";
+      bodyElement.className = "mx-4 mb-4";
+      titleElement.textContent = "Search Result"
+    })
+
+    document.querySelector(".close").addEventListener("click", function () {
+      bodyElement.innerHTML = "";
+      bodyElement.className = "mx-4 mb-4";
+      titleElement.textContent = "Search Result"
+    })
   }
 
   updateDetail(data) {
-    console.log("success:", data)
+    document.querySelector("#modal-body").innerHTML = "";
+
+    var titleElement = document.querySelector("#recipeModalTitle");
+    titleElement.textContent = data.title;
+
+    var bodyElement = document.querySelector("#modal-body");
+    var bodyContent = document.createElement("div")
+    bodyContent.className ="col-12 mt-4"
+    bodyElement.appendChild(bodyContent)
+
+    var picture = document.createElement("img");
+    picture.setAttribute("src", data.image)
+    var cookingTime = document.createElement("h6");
+    cookingTime.className = "theme-color mt-3"
+    cookingTime.textContent = "Ready in Minutes: " + data.readyInMinutes + " min.";
+    var serveSize = document.createElement("h6");
+    serveSize.className = "theme-color mt-3"
+    serveSize.textContent = "Servings: " + data.servings;
+    var dishType = document.createElement("h6");
+    dishType.className = "theme-color mt-3"
+    dishType.textContent = "Dish Type: " + data.dishTypes[0];
+    var summaryTitle = document.createElement("h6");
+    summaryTitle.className = "theme-color mt-3"
+    summaryTitle.textContent = "Summary:";
+    var summaryElement = document.createElement("div");
+    summaryElement.innerHTML = data.summary;
+    var extendedTitle = document.createElement("h6");
+    extendedTitle.className = "theme-color mt-3"
+    extendedTitle.textContent = "Extend Ingredients:";
+    var extendedIngredients = document.createElement("ul");
+    for (let i = 0; i < data.extendedIngredients.length; i++) {
+      var ingredients = document.createElement("li");
+      ingredients.textContent = data.extendedIngredients[i].original;
+      extendedIngredients.append(ingredients)
+    }
+
+    bodyContent.append(picture, cookingTime, serveSize, dishType, summaryTitle, summaryElement,
+      extendedTitle, extendedIngredients)
+
+    if (data.analyzedInstructions.length) {
+      var instructionTitle = document.createElement("h6")
+      instructionTitle.className = "theme-color mt-3"
+      instructionTitle.textContent = "Instruction:"
+      var instructions = document.createElement("ol")
+      for (let i = 0; i < data.analyzedInstructions.length; i++) {
+        data.analyzedInstructions[i].steps.map(x => {
+          var item = document.createElement("li")
+          item.textContent = x.step
+          instructions.appendChild(item)
+        })
+      }
+      bodyContent.append(instructionTitle, instructions)
+    } else {
+      var noInstruction = document.createElement("div")
+      noInstruction.textContent = "No detailed instruction provided."
+      bodyContent.append(noInstruction)
+    }
+
+    document.querySelector("#closeModal").addEventListener("click", function () {
+      bodyElement.innerHTML = "";
+      bodyElement.className = "mx-4 mb-4";
+      titleElement.textContent = "Search Result"
+    })
+
+    document.querySelector(".close").addEventListener("click", function () {
+      bodyElement.innerHTML = "";
+      bodyElement.className = "mx-4 mb-4";
+      titleElement.textContent = "Search Result"
+    })
   }
 }

@@ -37,7 +37,6 @@ class App {
 
   ingredientSearchSuccess(data) {
     this.resultModal.updateByIngredient(data);
-
   }
 
   ingredientSearchError(error) {
@@ -92,5 +91,6 @@ class App {
     this.searchByIngredientForm.onSubmit(this.ingredientSearch);
     this.searchByNutrientForm.onSubmit(this.nutrientSearch);
     this.resultModal.passGetRecipeInfo(this.getRecipeInfo);
+    this.resultModal.passGetMoreRecipe(this.randomSearchRecipe)
   }
 }

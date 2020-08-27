@@ -1,14 +1,14 @@
-var myRecipeModal = document.getElementById("modalContent");
-var newRecipeModal = new Modal(myRecipeModal);
+var modal = document.getElementById("modalContent");
+var newModal = new Modal(modal);
 
-var myRandomForm = document.getElementById("getRandomRecipe");
-var newRandomForm = new RandomForm(myRandomForm);
+var randomForm = document.getElementById("getRandomRecipe");
+var newRandomForm = new RandomForm(randomForm);
 
-var myIngeredientForm = document.getElementById("ingredientSearch");
-var newIngeredientForm = new IngredientForm(myIngeredientForm);
+var ingeredientForm = document.getElementById("ingredientSearch");
+var newIngeredientForm = new IngredientForm(ingeredientForm);
 
-var myNutrientForm = document.getElementById("nutrientSearch");
-var newNutrientForm = new NutrientForm(myNutrientForm);
+var nutrientForm = document.getElementById("nutrientSearch");
+var newNutrientForm = new NutrientForm(nutrientForm);
 
-var newSearch = new App(newRecipeModal, newRandomForm, newIngeredientForm, newNutrientForm);
-newSearch.start();
+var newApp = new App(newModal, newRandomForm, newIngeredientForm, newNutrientForm);
+newApp.start();
