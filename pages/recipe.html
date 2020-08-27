@@ -45,7 +45,8 @@
       <div class="control-form col-6">
         <h1>Find Your Recipes</h1>
         <h6>Search by Ingredients</h6>
-        <form class="searchIngredientForm needs-validation" novalidate id="ingredientSearch">
+
+        <form class="needs-validation" novalidate id="ingredientSearch">
           <div class="form-group col-sm-5 groupAdj">
             <label for="recipe-ingredient" class="sr-only">Ingredient</label>
             <div class="input-group groupMargin">
@@ -53,7 +54,7 @@
                 <span class="input-group-text"><i class="fas fa-utensils"></i></span>
               </div>
               <input type="text" name="ingredient" class="form-control" id="recipe-ingredient"
-                placeholder="EX: chicken, onion" aria-describedby="inputGroupPrepend" required>
+                placeholder="EX: chicken, onion" required>
               <div class="invalid-feedback">Please enter an ingredient</div>
             </div>
             <button type="submit" data-toggle="modal" data-target="#recipeModal" class="btn btn-dark">Search</button>
@@ -61,7 +62,7 @@
         </form>
 
         <h6 class="mt-3">Search by Nutrients</h6>
-        <form class="searchMenuForm needs-validation" novalidate id="nutrientSearch">
+        <form class="searchMenuForm" novalidate id="nutrientSearch">
           <div class="form-group col-10 groupAdj">
             <label for="nutrient-name" class="sr-only">Nutrients</label>
             <div class="input-group groupMargin">
@@ -198,7 +199,6 @@
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
   <script src="../components/config.js"></script>
-  <script src="../components/recipe/form-validation.js"></script>
   <script src="../components/recipe/app-recipe.js"></script>
   <script src="../components/recipe/recipe-modal.js"></script>
   <script src="../components/recipe/search-ingredient-form.js"></script>

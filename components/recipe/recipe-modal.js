@@ -23,8 +23,15 @@ class Modal {
   }
 
   updateByIngredient(data) {
+    var bodyElement = document.querySelector("#modal-body");
+    document.querySelector("#closeModal").addEventListener("click", function () {
+      bodyElement.innerHTML = "";
+    })
+    document.querySelector(".close").addEventListener("click", function () {
+      bodyElement.innerHTML = "";
+    })
+
     if (!data.length) {
-      var bodyElement = document.querySelector("#modal-body");
       var text = document.createElement("h5");
       text.textContent = "No result found.";
       text.className = "mt-4"
@@ -33,7 +40,6 @@ class Modal {
     }
 
     for (let i = 0; i < data.length; i++) {
-      var bodyElement = document.querySelector("#modal-body");
       var rowElement = document.createElement("div");
       rowElement.className = "modal-row mt-4";
       bodyElement.appendChild(rowElement);
@@ -90,17 +96,18 @@ class Modal {
       goToRecipe.addEventListener("click", this.handleCheckRecipe.bind(this, id))
       rightColumn.appendChild(goToRecipe);
     }
+  }
+
+  updateByNutrient(data, name) {
+    var bodyElement = document.querySelector("#modal-body");
     document.querySelector("#closeModal").addEventListener("click", function () {
       bodyElement.innerHTML = "";
     })
     document.querySelector(".close").addEventListener("click", function () {
       bodyElement.innerHTML = "";
     })
-  }
 
-  updateByNutrient(data, name) {
     if (!data.length) {
-      var bodyElement = document.querySelector("#modal-body");
       var text = document.createElement("h5");
       text.textContent = "No result found.";
       bodyElement.appendChild(text);
@@ -108,7 +115,6 @@ class Modal {
     }
 
     for (let i = 0; i < data.length; i++) {
-      var bodyElement = document.querySelector("#modal-body");
       var rowElement = document.createElement("div");
       rowElement.className = "modal-row mt-4";
       bodyElement.appendChild(rowElement);
@@ -157,12 +163,6 @@ class Modal {
       goToRecipe.addEventListener("click", this.handleCheckRecipe.bind(this, id))
       rightColumn.append(input, calories, carbs, fat, protein, goToRecipe)
     }
-    document.querySelector("#closeModal").addEventListener("click", function () {
-      bodyElement.innerHTML = "";
-    })
-    document.querySelector(".close").addEventListener("click", function () {
-      bodyElement.innerHTML = "";
-    })
   }
 
   updateRandomModal(data) {
