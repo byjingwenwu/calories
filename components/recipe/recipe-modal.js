@@ -1,7 +1,7 @@
 class Modal {
   constructor(modalElement) {
     this.modalElement = modalElement;
-    this.handleMoreRecipe =this.handleMoreRecipe.bind(this)
+    this.handleGetMoreRandomRecipe =this.handleGetMoreRandomRecipe.bind(this)
   }
 
   handleCheckRecipe(id) {
@@ -12,23 +12,37 @@ class Modal {
     this.getRecipeInfo = getRecipeInfo
   }
 
-  handleMoreRecipe() {
+  handleGetMoreRandomRecipe() {
     document.querySelector("#modal-body").innerHTML = ""
     document.querySelector("#modal-body").className = "mx-4 mb-4"
     this.randomSearchRecipe()
   }
 
-  passGetMoreRecipe(randomSearchRecipe) {
+  passGetMoreRandomRecipe(randomSearchRecipe) {
     this.randomSearchRecipe = randomSearchRecipe
+  }
+
+  shuffleData(array) {
+    for (let i = array.length - 1; i >0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
+  loadMoreRecipe(array) {
+
   }
 
   updateByIngredient(data) {
     var bodyElement = document.querySelector("#modal-body");
     document.querySelector("#closeModal").addEventListener("click", function () {
       bodyElement.innerHTML = "";
+      document.querySelector("#moreButton").classList.remove("d-none")
     })
     document.querySelector(".close").addEventListener("click", function () {
       bodyElement.innerHTML = "";
+      document.querySelector("#moreButton").classList.remove("d-none")
     })
 
     if (!data.length) {
@@ -39,7 +53,12 @@ class Modal {
       return;
     }
 
-    for (let i = 0; i < data.length; i++) {
+    if (data.length <= 5) {
+      document.querySelector("#moreButton").classList.add("d-none")
+    }
+
+    var newData = this.shuffleData(data).slice(0, 5);
+    for (let i = 0; i < newData.length; i++) {
       var rowElement = document.createElement("div");
       rowElement.className = "modal-row mt-4";
       bodyElement.appendChild(rowElement);
@@ -47,7 +66,7 @@ class Modal {
       var titleElement = document.createElement("div");
       titleElement.className = "recipe-title";
       var createTitle = document.createElement("h5");
-      createTitle.textContent = data[i].title;
+      createTitle.textContent = newData[i].title;
       titleElement.appendChild(createTitle);
       rowElement.appendChild(titleElement);
 
@@ -56,7 +75,7 @@ class Modal {
       rowElement.appendChild(content);
 
       var imgElement = document.createElement("img");
-      imgElement.setAttribute("src", data[i].image);
+      imgElement.setAttribute("src", newData[i].image);
       imgElement.className = "col-5 recipe-img";
       var rightColumn = document.createElement("div");
       rightColumn.className = "recipt-detail col-7";
@@ -65,7 +84,7 @@ class Modal {
       var usedTitle = document.createElement("h6");
       usedTitle.textContent = "Essencial Ingredients";
       rightColumn.appendChild(usedTitle);
-      var useArry = data[i].usedIngredients;
+      var useArry = newData[i].usedIngredients;
       if (useArry.length === 0) {
         var none = document.createElement("p");
         none.textContent = "None";
@@ -81,7 +100,7 @@ class Modal {
       var missingTitle = document.createElement("h6");
       missingTitle.textContent = "Additional Ingredients Needed";
       rightColumn.appendChild(missingTitle);
-      var ingArry = data[i].missedIngredients;
+      var ingArry = newData[i].missedIngredients;
       for (let n = 0; n < ingArry.length; n++) {
         var ingredients = document.createElement("p");
         ingredients.textContent = ingArry[n].originalString;
@@ -89,7 +108,7 @@ class Modal {
       }
 
       var goToRecipe = document.createElement("button");
-      var id = data[i].id;
+      var id = newData[i].id;
       goToRecipe.setAttribute("type", "button");
       goToRecipe.className = "btn btn-link btn-link-2";
       goToRecipe.innerHTML = 'Check Recipe<i class="fa fa-angle-double-right">';
@@ -102,9 +121,11 @@ class Modal {
     var bodyElement = document.querySelector("#modal-body");
     document.querySelector("#closeModal").addEventListener("click", function () {
       bodyElement.innerHTML = "";
+      document.querySelector("#moreButton").classList.remove("d-none")
     })
     document.querySelector(".close").addEventListener("click", function () {
       bodyElement.innerHTML = "";
+      document.querySelector("#moreButton").classList.remove("d-none")
     })
 
     if (!data.length) {
@@ -114,7 +135,12 @@ class Modal {
       return;
     }
 
-    for (let i = 0; i < data.length; i++) {
+    if (data.length <= 5) {
+      document.querySelector("#moreButton").classList.add("d-none")
+    }
+
+    var newData = this.shuffleData(data).slice(0, 5);
+    for (let i = 0; i < newData.length; i++) {
       var rowElement = document.createElement("div");
       rowElement.className = "modal-row mt-4";
       bodyElement.appendChild(rowElement);
@@ -122,7 +148,7 @@ class Modal {
       var titleElement = document.createElement("div");
       titleElement.className = "recipe-title";
       var createTitle = document.createElement("h5");
-      createTitle.textContent = data[i].title;
+      createTitle.textContent = newData[i].title;
       titleElement.appendChild(createTitle);
       rowElement.appendChild(titleElement);
 
@@ -131,7 +157,7 @@ class Modal {
       rowElement.appendChild(content);
 
       var imgElement = document.createElement("img");
-      imgElement.setAttribute("src", data[i].image);
+      imgElement.setAttribute("src", newData[i].image);
       imgElement.className = "col-5 recipe-img";
       var rightColumn = document.createElement("div");
       rightColumn.className = "recipt-detail col-7";
@@ -140,23 +166,23 @@ class Modal {
       var nutTitle = document.createElement("h6");
       nutTitle.textContent = "Nutrition Facts";
       rightColumn.appendChild(nutTitle);
-      for (var value in data[i]) {
+      for (var value in newData[i]) {
         if (value.toLowerCase() == name.toLowerCase()) {
           var input = document.createElement("div");
-          input.textContent = name + ": " + data[i][value];
+          input.textContent = name + ": " + newData[i][value];
         }
       }
       var calories = document.createElement("div");
-      calories.textContent = "Calories: " + data[i].calories
+      calories.textContent = "Calories: " + newData[i].calories
       var carbs = document.createElement("div");
-      carbs.textContent = "Carbs: " + data[i].carbs;
+      carbs.textContent = "Carbs: " + newData[i].carbs;
       var fat = document.createElement("div");
-      fat.textContent = "Fat: " + data[i].fat;
+      fat.textContent = "Fat: " + newData[i].fat;
       var protein = document.createElement("div");
-      protein.textContent = "Protein: " + data[i].protein;
+      protein.textContent = "Protein: " + newData[i].protein;
 
       var goToRecipe = document.createElement("button");
-      var id = data[i].id;
+      var id = newData[i].id;
       goToRecipe.setAttribute("type", "button");
       goToRecipe.className = "btn btn-link btn-link-2";
       goToRecipe.innerHTML = 'Check Recipe<i class="fa fa-angle-double-right">';
@@ -233,7 +259,7 @@ class Modal {
       rightColumn.append(noInstruction)
     }
 
-    document.querySelector("#moreButton").addEventListener("click", this.handleMoreRecipe)
+    document.querySelector("#moreButton").addEventListener("click", this.handleGetMoreRandomRecipe)
 
     document.querySelector("#closeModal").addEventListener("click", function () {
       bodyElement.innerHTML = "";

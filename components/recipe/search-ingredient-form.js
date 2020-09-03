@@ -21,11 +21,11 @@ class IngredientForm {
       error.className = "theme-color col-12 mt-4"
       error.textContent = "Please enter at least one valid ingredient."
       body.append(error)
-      document.querySelector("#moreButton").classList.add("hidden")
+      document.querySelector("#moreButton").classList.add("d-none")
       document.querySelector("#closeModal").addEventListener("click", function () {
         body.innerHTML = "";
         title.textContent = "Search Result"
-        document.querySelector("#moreButton").classList.remove("hidden")
+        document.querySelector("#moreButton").classList.remove("d-none")
       })
       document.querySelector(".close").addEventListener("click", function () {
         body.innerHTML = "";
