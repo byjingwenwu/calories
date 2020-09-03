@@ -13,7 +13,29 @@ class IngredientForm {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     var input = formData.get("ingredient");
-    this.ingredientSearch(input);
-    event.target.reset();
+    if (!input) {
+      var title = document.querySelector("#recipeModalTitle")
+      title.textContent = "Error"
+      var body = document.querySelector("#modal-body")
+      var error = document.createElement("h6")
+      error.className = "theme-color col-12 mt-4"
+      error.textContent = "Please enter at least one valid ingredient."
+      body.append(error)
+      document.querySelector("#moreButton").classList.add("hidden")
+      document.querySelector("#closeModal").addEventListener("click", function () {
+        body.innerHTML = "";
+        title.textContent = "Search Result"
+        document.querySelector("#moreButton").classList.remove("hidden")
+      })
+      document.querySelector(".close").addEventListener("click", function () {
+        body.innerHTML = "";
+        title.textContent = "Search Result"
+        document.querySelector("#moreButton").classList.remove("hidden")
+      })
+      event.stopPropagation();
+    } else {
+      this.ingredientSearch(input);
+      event.target.reset();
+    }
   }
 }
