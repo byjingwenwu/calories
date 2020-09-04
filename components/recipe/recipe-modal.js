@@ -1,7 +1,7 @@
 class Modal {
   constructor(modalElement) {
     this.modalElement = modalElement;
-    this.handleGetMoreRandomRecipe =this.handleGetMoreRandomRecipe.bind(this)
+    this.handleGetMoreRandomRecipe = this.handleGetMoreRandomRecipe.bind(this)
   }
 
   handleCheckRecipe(id) {
@@ -23,19 +23,28 @@ class Modal {
   }
 
   shuffleData(array) {
-    for (let i = array.length - 1; i >0; i--) {
+    for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
     }
     return array;
   }
 
-  loadMoreRecipe(array) {
-
+  loadMoreRecipe() {
+    var list = document.querySelectorAll(".modal-row.d-none")
+    for (let i = 0; i < 5; i++) {
+      list[i].classList.remove("d-none")
+    }
+    var list2 = document.querySelectorAll(".modal-row.d-none")
+    if (list2.length <= 5) {
+      document.querySelector("#moreButton").classList.add("d-none")
+    }
   }
 
   updateByIngredient(data) {
     var bodyElement = document.querySelector("#modal-body");
+    var newData = this.shuffleData(data);
+
     document.querySelector("#closeModal").addEventListener("click", function () {
       bodyElement.innerHTML = "";
       document.querySelector("#moreButton").classList.remove("d-none")
@@ -56,11 +65,14 @@ class Modal {
     if (data.length <= 5) {
       document.querySelector("#moreButton").classList.add("d-none")
     }
+    document.querySelector("#moreButton").addEventListener("click", this.loadMoreRecipe)
 
-    var newData = this.shuffleData(data).slice(0, 5);
     for (let i = 0; i < newData.length; i++) {
       var rowElement = document.createElement("div");
       rowElement.className = "modal-row mt-4";
+      if (i >= 5) {
+        rowElement.classList.add("d-none")
+      }
       bodyElement.appendChild(rowElement);
 
       var titleElement = document.createElement("div");
@@ -119,6 +131,8 @@ class Modal {
 
   updateByNutrient(data, name) {
     var bodyElement = document.querySelector("#modal-body");
+    var newData = this.shuffleData(data);
+
     document.querySelector("#closeModal").addEventListener("click", function () {
       bodyElement.innerHTML = "";
       document.querySelector("#moreButton").classList.remove("d-none")
@@ -138,11 +152,14 @@ class Modal {
     if (data.length <= 5) {
       document.querySelector("#moreButton").classList.add("d-none")
     }
+    document.querySelector("#moreButton").addEventListener("click", this.loadMoreRecipe)
 
-    var newData = this.shuffleData(data).slice(0, 5);
     for (let i = 0; i < newData.length; i++) {
       var rowElement = document.createElement("div");
       rowElement.className = "modal-row mt-4";
+      if (i >= 5) {
+        rowElement.classList.add("d-none")
+      }
       bodyElement.appendChild(rowElement);
 
       var titleElement = document.createElement("div");
@@ -282,7 +299,7 @@ class Modal {
 
     var bodyElement = document.querySelector("#modal-body");
     var bodyContent = document.createElement("div")
-    bodyContent.className ="col-12 mt-4"
+    bodyContent.className = "col-12 mt-4"
     bodyElement.appendChild(bodyContent)
 
     var picture = document.createElement("img");
