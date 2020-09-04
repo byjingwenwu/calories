@@ -30,7 +30,7 @@ class IngredientForm {
       document.querySelector(".close").addEventListener("click", function () {
         body.innerHTML = "";
         title.textContent = "Search Result"
-        document.querySelector("#moreButton").classList.remove("hidden")
+        document.querySelector("#moreButton").classList.remove("d-none")
       })
       event.stopPropagation();
     } else {
