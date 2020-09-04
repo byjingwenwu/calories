@@ -1,6 +1,7 @@
 class App {
   constructor(resultModal, randomSearchForm, searchByIngredientForm, searchByNutrientForm) {
     this.resultModal = resultModal;
+    this.recipeData = [];
     this.randomSearchForm = randomSearchForm;
     this.searchByIngredientForm = searchByIngredientForm;
     this.searchByNutrientForm = searchByNutrientForm;
@@ -36,7 +37,8 @@ class App {
   }
 
   ingredientSearchSuccess(data) {
-    this.resultModal.updateByIngredient(data);
+    this.recipeData = data;
+    this.resultModal.updateByIngredient(this.recipeData);
   }
 
   ingredientSearchError(error) {
@@ -46,14 +48,15 @@ class App {
   ingredientSearch(ing) {
     $.ajax({
       method: "GET",
-      url: "https://api.spoonacular.com/recipes/findByIngredients?" + spoonacularApiKey + "&ingredients=" + ing + "&random=true&number=5",
+      url: "https://api.spoonacular.com/recipes/findByIngredients?" + spoonacularApiKey + "&ingredients=" + ing + "&random=true&number=100",
       success: this.ingredientSearchSuccess,
       error: this.ingredientSearchError
     })
   }
 
   nutrientSearchSuccess(data, name) {
-    this.resultModal.updateByNutrient(data, name);
+    this.recipeData = data;
+    this.resultModal.updateByNutrient(this.recipeData, name);
   }
 
   nutrientSearchError(error) {
@@ -63,7 +66,7 @@ class App {
   nutrientSearch(name, min, max) {
     $.ajax({
       method: "GET",
-      url: "https://api.spoonacular.com/recipes/findByNutrients?" + spoonacularApiKey + "&min" + name + "=" + min + "&max" + name + "=" + max + "&number=5",
+      url: "https://api.spoonacular.com/recipes/findByNutrients?" + spoonacularApiKey + "&min" + name + "=" + min + "&max" + name + "=" + max + "&number=100",
       success: (data) => this.nutrientSearchSuccess(data, name),
       error: this.nutrientSearchError
     })
@@ -91,6 +94,6 @@ class App {
     this.searchByIngredientForm.onSubmit(this.ingredientSearch);
     this.searchByNutrientForm.onSubmit(this.nutrientSearch);
     this.resultModal.passGetRecipeInfo(this.getRecipeInfo);
-    this.resultModal.passGetMoreRecipe(this.randomSearchRecipe)
+    this.resultModal.passGetMoreRandomRecipe(this.randomSearchRecipe)
   }
 }
