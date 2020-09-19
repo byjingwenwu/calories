@@ -42,9 +42,8 @@ class Modal {
   }
 
   saveToLike() {
-    console.log("liked")
-
-
+    var like = document.querySelector("#likeButton")
+    like.classList.toggle("fas")
   }
 
   updateByIngredient(data) {
@@ -92,12 +91,15 @@ class Modal {
       content.className = "d-flex justify-content-center align-items-start mt-3";
       rowElement.appendChild(content);
 
+      var leftColumn = document.createElement("div")
+      leftColumn.className = "col-5"
       var imgElement = document.createElement("img");
       imgElement.setAttribute("src", newData[i].image);
-      imgElement.className = "col-5 recipe-img";
+      imgElement.className = "w-100";
+      leftColumn.appendChild(imgElement)
       var rightColumn = document.createElement("div");
       rightColumn.className = "recipt-detail col-7";
-      content.append(imgElement, rightColumn);
+      content.append(leftColumn, rightColumn);
 
       var usedTitle = document.createElement("h6");
       usedTitle.textContent = "Essencial Ingredients";
@@ -222,14 +224,13 @@ class Modal {
     bodyElement.className = "mx-4 mb-4 d-flex justify-content-between align-items-start mt-3"
     var leftColumn = document.createElement("div")
     leftColumn.className= "col-5"
-    leftColumn.setAttribute("id", "likeButton")
     var imgElement = document.createElement("img");
     imgElement.setAttribute("src", data.recipes[0].image);
     imgElement.className = "w-100";
     var likeButton = document.createElement("i")
     likeButton.setAttribute("class", "far fa-heart mt-2 theme-color likeButton")
+    likeButton.setAttribute("id", "likeButton")
     likeButton.addEventListener("click", this.saveToLike)
-    likeButton.setAttribute("id", "unlike")
     leftColumn.append(imgElement, likeButton)
     var rightColumn = document.createElement("div");
     rightColumn.className = "recipt-detail col-7";
