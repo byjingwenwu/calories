@@ -19,7 +19,7 @@ class IngredientForm {
       var body = document.querySelector("#modal-body")
       var error = document.createElement("h6")
       error.className = "theme-color col-12 mt-4"
-      error.textContent = "Please enter at least one valid ingredient."
+      error.innerHTML = "Please enter at least one valid ingredient. <br/> For example: chicken, onion, pepper"
       body.append(error)
       document.querySelector("#moreButton").classList.add("d-none")
       document.querySelector("#closeModal").addEventListener("click", function () {

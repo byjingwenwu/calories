@@ -41,6 +41,12 @@ class Modal {
     }
   }
 
+  saveToLike() {
+    console.log("liked")
+
+
+  }
+
   updateByIngredient(data) {
     var bodyElement = document.querySelector("#modal-body");
     var newData = this.shuffleData(data);
@@ -214,12 +220,20 @@ class Modal {
 
     var bodyElement = document.querySelector("#modal-body");
     bodyElement.className = "mx-4 mb-4 d-flex justify-content-between align-items-start mt-3"
+    var leftColumn = document.createElement("div")
+    leftColumn.className= "col-5"
+    leftColumn.setAttribute("id", "likeButton")
     var imgElement = document.createElement("img");
     imgElement.setAttribute("src", data.recipes[0].image);
-    imgElement.className = "col-5 recipe-img";
+    imgElement.className = "w-100";
+    var likeButton = document.createElement("i")
+    likeButton.setAttribute("class", "far fa-heart mt-2 theme-color likeButton")
+    likeButton.addEventListener("click", this.saveToLike)
+    likeButton.setAttribute("id", "unlike")
+    leftColumn.append(imgElement, likeButton)
     var rightColumn = document.createElement("div");
     rightColumn.className = "recipt-detail col-7";
-    bodyElement.append(imgElement, rightColumn);
+    bodyElement.append(leftColumn, rightColumn);
 
     var cuisineTitle = document.createElement("h6");
     cuisineTitle.className = "theme-color"
