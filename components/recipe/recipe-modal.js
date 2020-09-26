@@ -41,9 +41,10 @@ class Modal {
     }
   }
 
-  saveToLike() {
-    var like = document.querySelector("#likeButton")
-    like.classList.toggle("fas")
+  saveToLike(event) {
+    console.log(event)
+    console.log(event.currentTarget)
+    event.currentTarget.classList.toggle("fas")
   }
 
   updateByIngredient(data) {
@@ -218,15 +219,16 @@ class Modal {
 
   updateRandomModal(data) {
     var titleElement = document.querySelector("#recipeModalTitle");
-    titleElement.textContent = data.recipes[0].title;
+    titleElement.textContent = data.title;
 
     var bodyElement = document.querySelector("#modal-body");
     bodyElement.className = "mx-4 mb-4 d-flex justify-content-between align-items-start mt-3"
     var leftColumn = document.createElement("div")
-    leftColumn.className= "col-5"
+    leftColumn.className = "col-5"
     var imgElement = document.createElement("img");
-    imgElement.setAttribute("src", data.recipes[0].image);
+    imgElement.setAttribute("src", data.image);
     imgElement.className = "w-100";
+
     var likeButton = document.createElement("i")
     likeButton.setAttribute("class", "far fa-heart mt-2 theme-color likeButton")
     likeButton.setAttribute("id", "likeButton")
@@ -238,12 +240,11 @@ class Modal {
 
     var cuisineTitle = document.createElement("h6");
     cuisineTitle.className = "theme-color"
-    var cusines = data.recipes[0].cuisines;
     var cusinesName = "";
-    for (let i = 0; i < cusines.length; i++) {
-      cusinesName += cusines[i] + " ";
+    for (let i = 0; i < data.cuisines.length; i++) {
+      cusinesName += data.cuisines[i] + " ";
     }
-    if (cusines.length !== 0) {
+    if (data.cuisines.length !== 0) {
       cuisineTitle.textContent = "Cuisines: " + cusinesName;
       rightColumn.appendChild(cuisineTitle);
     }
@@ -252,33 +253,33 @@ class Modal {
     summaryTitle.className = "theme-color mt-2"
     summaryTitle.textContent = "Summary:";
     var summaryElement = document.createElement("div");
-    summaryElement.innerHTML = data.recipes[0].summary;
+    summaryElement.innerHTML = data.summary;
     var cookingTime = document.createElement("h6");
     cookingTime.className = "theme-color mt-2"
-    cookingTime.textContent = "Ready in Minutes: " + data.recipes[0].readyInMinutes + " min.";
+    cookingTime.textContent = "Ready in Minutes: " + data.prepTime + " min.";
     var serveSize = document.createElement("h6");
     serveSize.className = "theme-color mt-2";
-    serveSize.textContent = "Servings: " + data.recipes[0].servings;
+    serveSize.textContent = "Servings: " + data.servings;
     rightColumn.append(summaryTitle, summaryElement, cookingTime, serveSize);
 
     var ingredientsTitle = document.createElement("h6");
     ingredientsTitle.className = "theme-color mt-2";
     ingredientsTitle.textContent = "Ingresients:";
     var extendedIngredients = document.createElement("ul");
-    for (let i = 0; i < data.recipes[0].extendedIngredients.length; i++) {
+    for (let i = 0; i < data.ingredients.length; i++) {
       var ingredients = document.createElement("li");
-      ingredients.textContent = data.recipes[0].extendedIngredients[i].original;
+      ingredients.textContent = data.ingredients[i].original;
       extendedIngredients.appendChild(ingredients);
     }
     rightColumn.append(ingredientsTitle, extendedIngredients);
 
-    if (data.recipes[0].analyzedInstructions.length) {
+    if (data.instruction.length) {
       var instructionTitle = document.createElement("h6")
       instructionTitle.className = "theme-color"
       instructionTitle.textContent = "Instruction:"
       var instructions = document.createElement("ol")
-      for (let i = 0; i < data.recipes[0].analyzedInstructions.length; i++) {
-        data.recipes[0].analyzedInstructions[i].steps.map(x => {
+      for (let i = 0; i < data.instruction.length; i++) {
+        data.instruction[i].steps.map(x => {
           var item = document.createElement("li")
           item.textContent = x.step
           instructions.appendChild(item)
@@ -319,6 +320,13 @@ class Modal {
 
     var picture = document.createElement("img");
     picture.setAttribute("src", data.image)
+    picture.className = "w-100"
+
+    var likeButton = document.createElement("i")
+    likeButton.setAttribute("class", "far fa-heart mt-3 theme-color likeButton")
+    likeButton.setAttribute("id", "likeButton")
+    likeButton.addEventListener("click", this.saveToLike)
+
     var cookingTime = document.createElement("h6");
     cookingTime.className = "theme-color mt-3"
     cookingTime.textContent = "Ready in Minutes: " + data.readyInMinutes + " min.";
@@ -343,7 +351,7 @@ class Modal {
       extendedIngredients.append(ingredients)
     }
 
-    bodyContent.append(picture, cookingTime, serveSize, dishType, summaryTitle, summaryElement,
+    bodyContent.append(picture, likeButton, cookingTime, serveSize, dishType, summaryTitle, summaryElement,
       extendedTitle, extendedIngredients)
 
     if (data.analyzedInstructions.length) {
