@@ -30,6 +30,7 @@ class Modal {
     return array;
   }
 
+
   loadMoreRecipe() {
     var list = document.querySelectorAll(".modal-row.d-none")
     for (let i = 0; i < 5; i++) {
@@ -41,11 +42,7 @@ class Modal {
     }
   }
 
-  saveToLike(event) {
-    console.log(event)
-    console.log(event.currentTarget)
-    event.currentTarget.classList.toggle("fas")
-  }
+
 
   updateByIngredient(data) {
     var bodyElement = document.querySelector("#modal-body");
@@ -232,7 +229,11 @@ class Modal {
     var likeButton = document.createElement("i")
     likeButton.setAttribute("class", "far fa-heart mt-2 theme-color likeButton")
     likeButton.setAttribute("id", "likeButton")
-    likeButton.addEventListener("click", this.saveToLike)
+    console.log(data)
+    likeButton.addEventListener("click", function () {
+      console.log(data);
+      event.currentTarget.classList.toggle("fas")
+    }, false)
     leftColumn.append(imgElement, likeButton)
     var rightColumn = document.createElement("div");
     rightColumn.className = "recipt-detail col-7";
@@ -325,7 +326,10 @@ class Modal {
     var likeButton = document.createElement("i")
     likeButton.setAttribute("class", "far fa-heart mt-3 theme-color likeButton")
     likeButton.setAttribute("id", "likeButton")
-    likeButton.addEventListener("click", this.saveToLike)
+    likeButton.addEventListener("click", function () {
+      console.log(data);
+      event.currentTarget.classList.toggle("fas")
+    }, false)
 
     var cookingTime = document.createElement("h6");
     cookingTime.className = "theme-color mt-3"
