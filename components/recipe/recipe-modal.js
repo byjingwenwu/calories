@@ -5,6 +5,8 @@ class Modal {
   }
 
   handleCheckRecipe(id) {
+    document.querySelector("#modal-body").innerHTML = "";
+    document.querySelector("#more-button").parentNode.removeChild(document.querySelector("#more-button"))
     this.getRecipeInfo(id)
   }
 
@@ -13,8 +15,10 @@ class Modal {
   }
 
   handleGetMoreRandomRecipe() {
+    document.querySelector("#recipeModalTitle").textContent = ""
     document.querySelector("#modal-body").innerHTML = ""
     document.querySelector("#modal-body").className = "mx-4 mb-4"
+    document.querySelector("#more-button").parentNode.removeChild(document.querySelector("#more-button"))
     this.randomSearchRecipe()
   }
 
@@ -38,180 +42,202 @@ class Modal {
     }
     var list2 = document.querySelectorAll(".modal-row.d-none")
     if (list2.length <= 5) {
-      document.querySelector("#moreButton").classList.add("d-none")
+      document.querySelector("#more-button").remove()
     }
   }
 
-
-
   updateByIngredient(data) {
     var bodyElement = document.querySelector("#modal-body");
+    var titleElement = document.querySelector("#recipeModalTitle");
+    titleElement.textContent = "Search Result"
+    var footer = document.querySelector(".modal-footer")
     var newData = this.shuffleData(data);
-
-    document.querySelector("#closeModal").addEventListener("click", function () {
-      bodyElement.innerHTML = "";
-      document.querySelector("#moreButton").classList.remove("d-none")
-    })
-    document.querySelector(".close").addEventListener("click", function () {
-      bodyElement.innerHTML = "";
-      document.querySelector("#moreButton").classList.remove("d-none")
-    })
 
     if (!data.length) {
       var text = document.createElement("h5");
       text.textContent = "No result found.";
       text.className = "mt-4"
       bodyElement.appendChild(text);
-      return;
-    }
+    } else {
+      for (let i = 0; i < newData.length; i++) {
+        var rowElement = document.createElement("div");
+        rowElement.className = "modal-row mt-4";
+        if (i >= 5) {
+          rowElement.classList.add("d-none")
+        }
+        bodyElement.appendChild(rowElement);
 
-    if (data.length <= 5) {
-      document.querySelector("#moreButton").classList.add("d-none")
-    }
-    document.querySelector("#moreButton").addEventListener("click", this.loadMoreRecipe)
+        var title = document.createElement("div");
+        title.className = "recipe-title";
+        var createTitle = document.createElement("h5");
+        createTitle.textContent = newData[i].title;
+        title.appendChild(createTitle);
+        rowElement.appendChild(title);
 
-    for (let i = 0; i < newData.length; i++) {
-      var rowElement = document.createElement("div");
-      rowElement.className = "modal-row mt-4";
-      if (i >= 5) {
-        rowElement.classList.add("d-none")
-      }
-      bodyElement.appendChild(rowElement);
+        var content = document.createElement("div");
+        content.className = "d-flex justify-content-center align-items-start mt-3";
+        rowElement.appendChild(content);
 
-      var titleElement = document.createElement("div");
-      titleElement.className = "recipe-title";
-      var createTitle = document.createElement("h5");
-      createTitle.textContent = newData[i].title;
-      titleElement.appendChild(createTitle);
-      rowElement.appendChild(titleElement);
+        var leftColumn = document.createElement("div")
+        leftColumn.className = "col-5"
+        var imgElement = document.createElement("img");
+        imgElement.setAttribute("src", newData[i].image);
+        imgElement.className = "w-100";
+        leftColumn.appendChild(imgElement)
+        var rightColumn = document.createElement("div");
+        rightColumn.className = "recipt-detail col-7";
+        content.append(leftColumn, rightColumn);
 
-      var content = document.createElement("div");
-      content.className = "d-flex justify-content-center align-items-start mt-3";
-      rowElement.appendChild(content);
+        var usedTitle = document.createElement("h6");
+        usedTitle.textContent = "Essencial Ingredients";
+        rightColumn.appendChild(usedTitle);
+        var useArry = newData[i].usedIngredients;
+        if (useArry.length === 0) {
+          var none = document.createElement("p");
+          none.textContent = "None";
+          rightColumn.appendChild(none);
+        } else {
+          for (let n = 0; n < useArry.length; n++) {
+            var ingredients = document.createElement("p");
+            ingredients.textContent = useArry[n].originalString;
+            rightColumn.appendChild(ingredients);
+          }
+        }
 
-      var leftColumn = document.createElement("div")
-      leftColumn.className = "col-5"
-      var imgElement = document.createElement("img");
-      imgElement.setAttribute("src", newData[i].image);
-      imgElement.className = "w-100";
-      leftColumn.appendChild(imgElement)
-      var rightColumn = document.createElement("div");
-      rightColumn.className = "recipt-detail col-7";
-      content.append(leftColumn, rightColumn);
-
-      var usedTitle = document.createElement("h6");
-      usedTitle.textContent = "Essencial Ingredients";
-      rightColumn.appendChild(usedTitle);
-      var useArry = newData[i].usedIngredients;
-      if (useArry.length === 0) {
-        var none = document.createElement("p");
-        none.textContent = "None";
-        rightColumn.appendChild(none);
-      } else {
-        for (let n = 0; n < useArry.length; n++) {
+        var missingTitle = document.createElement("h6");
+        missingTitle.textContent = "Additional Ingredients Needed";
+        rightColumn.appendChild(missingTitle);
+        var ingArry = newData[i].missedIngredients;
+        for (let n = 0; n < ingArry.length; n++) {
           var ingredients = document.createElement("p");
-          ingredients.textContent = useArry[n].originalString;
+          ingredients.textContent = ingArry[n].originalString;
           rightColumn.appendChild(ingredients);
         }
+
+        var goToRecipe = document.createElement("button");
+        var id = newData[i].id;
+        goToRecipe.setAttribute("type", "button");
+        goToRecipe.className = "btn btn-link btn-link-2";
+        goToRecipe.innerHTML = 'Check Recipe<i class="fa fa-angle-double-right">';
+        goToRecipe.addEventListener("click", this.handleCheckRecipe.bind(this, id))
+        rightColumn.appendChild(goToRecipe);
       }
 
-      var missingTitle = document.createElement("h6");
-      missingTitle.textContent = "Additional Ingredients Needed";
-      rightColumn.appendChild(missingTitle);
-      var ingArry = newData[i].missedIngredients;
-      for (let n = 0; n < ingArry.length; n++) {
-        var ingredients = document.createElement("p");
-        ingredients.textContent = ingArry[n].originalString;
-        rightColumn.appendChild(ingredients);
+      if (data.length > 5) {
+        var moreButton = document.createElement("button")
+        moreButton.setAttribute("type", "button")
+        moreButton.setAttribute("id", "more-button")
+        moreButton.setAttribute("class", "btn btn-dark btnAdj btnModal")
+        moreButton.textContent = "More"
+        moreButton.addEventListener("click", this.loadMoreRecipe)
+        footer.prepend(moreButton)
       }
-
-      var goToRecipe = document.createElement("button");
-      var id = newData[i].id;
-      goToRecipe.setAttribute("type", "button");
-      goToRecipe.className = "btn btn-link btn-link-2";
-      goToRecipe.innerHTML = 'Check Recipe<i class="fa fa-angle-double-right">';
-      goToRecipe.addEventListener("click", this.handleCheckRecipe.bind(this, id))
-      rightColumn.appendChild(goToRecipe);
     }
+
+    document.querySelector("#close-button").addEventListener("click", function () {
+      bodyElement.innerHTML = "";
+      titleElement.textContent = ""
+      if(document.querySelector("#more-button")) {
+        document.querySelector("#more-button").remove()
+      }
+    })
+    document.querySelector(".close").addEventListener("click", function () {
+      bodyElement.innerHTML = "";
+      titleElement.textContent = ""
+      if (document.querySelector("#more-button")) {
+        document.querySelector("#more-button").remove()
+      }
+    })
   }
 
   updateByNutrient(data, name) {
     var bodyElement = document.querySelector("#modal-body");
+    var titleElement = document.querySelector("#recipeModalTitle");
+    titleElement.textContent = "Search Result"
+    var footer = document.querySelector(".modal-footer")
     var newData = this.shuffleData(data);
-
-    document.querySelector("#closeModal").addEventListener("click", function () {
-      bodyElement.innerHTML = "";
-      document.querySelector("#moreButton").classList.remove("d-none")
-    })
-    document.querySelector(".close").addEventListener("click", function () {
-      bodyElement.innerHTML = "";
-      document.querySelector("#moreButton").classList.remove("d-none")
-    })
 
     if (!data.length) {
       var text = document.createElement("h5");
       text.textContent = "No result found.";
       bodyElement.appendChild(text);
-      return;
-    }
-
-    if (data.length <= 5) {
-      document.querySelector("#moreButton").classList.add("d-none")
-    }
-    document.querySelector("#moreButton").addEventListener("click", this.loadMoreRecipe)
-
-    for (let i = 0; i < newData.length; i++) {
-      var rowElement = document.createElement("div");
-      rowElement.className = "modal-row mt-4";
-      if (i >= 5) {
-        rowElement.classList.add("d-none")
-      }
-      bodyElement.appendChild(rowElement);
-
-      var titleElement = document.createElement("div");
-      titleElement.className = "recipe-title";
-      var createTitle = document.createElement("h5");
-      createTitle.textContent = newData[i].title;
-      titleElement.appendChild(createTitle);
-      rowElement.appendChild(titleElement);
-
-      var content = document.createElement("div");
-      content.className = "d-flex justify-content-center align-items-start mt-3";
-      rowElement.appendChild(content);
-
-      var imgElement = document.createElement("img");
-      imgElement.setAttribute("src", newData[i].image);
-      imgElement.className = "col-5 recipe-img";
-      var rightColumn = document.createElement("div");
-      rightColumn.className = "recipt-detail col-7";
-      content.append(imgElement, rightColumn);
-
-      var nutTitle = document.createElement("h6");
-      nutTitle.textContent = "Nutrition Facts";
-      rightColumn.appendChild(nutTitle);
-      for (var value in newData[i]) {
-        if (value.toLowerCase() == name.toLowerCase()) {
-          var input = document.createElement("div");
-          input.textContent = name + ": " + newData[i][value];
+    } else {
+      for (let i = 0; i < newData.length; i++) {
+        var rowElement = document.createElement("div");
+        rowElement.className = "modal-row mt-4";
+        if (i >= 5) {
+          rowElement.classList.add("d-none")
         }
-      }
-      var calories = document.createElement("div");
-      calories.textContent = "Calories: " + newData[i].calories
-      var carbs = document.createElement("div");
-      carbs.textContent = "Carbs: " + newData[i].carbs;
-      var fat = document.createElement("div");
-      fat.textContent = "Fat: " + newData[i].fat;
-      var protein = document.createElement("div");
-      protein.textContent = "Protein: " + newData[i].protein;
+        bodyElement.appendChild(rowElement);
 
-      var goToRecipe = document.createElement("button");
-      var id = newData[i].id;
-      goToRecipe.setAttribute("type", "button");
-      goToRecipe.className = "btn btn-link btn-link-2";
-      goToRecipe.innerHTML = 'Check Recipe<i class="fa fa-angle-double-right">';
-      goToRecipe.addEventListener("click", this.handleCheckRecipe.bind(this, id))
-      rightColumn.append(input, calories, carbs, fat, protein, goToRecipe)
+        var title = document.createElement("div");
+        title.className = "recipe-title";
+        var createTitle = document.createElement("h5");
+        createTitle.textContent = newData[i].title;
+        title.appendChild(createTitle);
+        rowElement.appendChild(title);
+
+        var content = document.createElement("div");
+        content.className = "d-flex justify-content-center align-items-start mt-3";
+        rowElement.appendChild(content);
+
+        var imgElement = document.createElement("img");
+        imgElement.setAttribute("src", newData[i].image);
+        imgElement.className = "col-5 recipe-img";
+        var rightColumn = document.createElement("div");
+        rightColumn.className = "recipt-detail col-7";
+        content.append(imgElement, rightColumn);
+
+        var nutTitle = document.createElement("h6");
+        nutTitle.textContent = "Nutrition Facts";
+        rightColumn.appendChild(nutTitle);
+        for (var value in newData[i]) {
+          if (value.toLowerCase() == name.toLowerCase()) {
+            var input = document.createElement("div");
+            input.textContent = name + ": " + newData[i][value];
+          }
+        }
+        var calories = document.createElement("div");
+        calories.textContent = "Calories: " + newData[i].calories
+        var carbs = document.createElement("div");
+        carbs.textContent = "Carbs: " + newData[i].carbs;
+        var fat = document.createElement("div");
+        fat.textContent = "Fat: " + newData[i].fat;
+        var protein = document.createElement("div");
+        protein.textContent = "Protein: " + newData[i].protein;
+
+        var goToRecipe = document.createElement("button");
+        var id = newData[i].id;
+        goToRecipe.setAttribute("type", "button");
+        goToRecipe.className = "btn btn-link btn-link-2";
+        goToRecipe.innerHTML = 'Check Recipe<i class="fa fa-angle-double-right">';
+        goToRecipe.addEventListener("click", this.handleCheckRecipe.bind(this, id))
+        rightColumn.append(input, calories, carbs, fat, protein, goToRecipe)
+      }
+      if (data.length > 5) {
+        var moreButton = document.createElement("button")
+        moreButton.setAttribute("type", "button")
+        moreButton.setAttribute("id", "more-button")
+        moreButton.setAttribute("class", "btn btn-dark btnAdj btnModal")
+        moreButton.textContent = "More"
+        moreButton.addEventListener("click", this.loadMoreRecipe)
+        footer.prepend(moreButton)
+      }
     }
+    document.querySelector("#close-button").addEventListener("click", function () {
+      bodyElement.innerHTML = "";
+      titleElement.textContent = ""
+      if (document.querySelector("#more-button")) {
+        document.querySelector("#more-button").remove()
+      }
+    })
+    document.querySelector(".close").addEventListener("click", function () {
+      bodyElement.innerHTML = "";
+      titleElement.textContent = ""
+      if (document.querySelector("#more-button")) {
+        document.querySelector("#more-button").remove()
+      }
+    })
   }
 
   updateRandomModal(data) {
@@ -229,7 +255,6 @@ class Modal {
     var likeButton = document.createElement("i")
     likeButton.setAttribute("class", "far fa-heart mt-2 theme-color likeButton")
     likeButton.setAttribute("id", "likeButton")
-    console.log(data)
     likeButton.addEventListener("click", function () {
       console.log(data);
       event.currentTarget.classList.toggle("fas")
@@ -293,24 +318,31 @@ class Modal {
       rightColumn.append(noInstruction)
     }
 
-    document.querySelector("#moreButton").addEventListener("click", this.handleGetMoreRandomRecipe)
+    var footer = document.querySelector(".modal-footer")
+    var moreButton = document.createElement("button")
+    moreButton.setAttribute("type", "button")
+    moreButton.setAttribute("id", "more-button")
+    moreButton.setAttribute("class", "btn btn-dark btnAdj btnModal")
+    moreButton.textContent = "More"
+    moreButton.addEventListener("click", this.handleGetMoreRandomRecipe)
+    footer.prepend(moreButton)
 
-    document.querySelector("#closeModal").addEventListener("click", function () {
+    document.querySelector("#close-button").addEventListener("click", function () {
       bodyElement.innerHTML = "";
       bodyElement.className = "mx-4 mb-4";
-      titleElement.textContent = "Search Result"
+      titleElement.textContent = ""
+      moreButton.remove()
     })
 
     document.querySelector(".close").addEventListener("click", function () {
       bodyElement.innerHTML = "";
       bodyElement.className = "mx-4 mb-4";
-      titleElement.textContent = "Search Result"
+      titleElement.textContent = ""
+      moreButton.remove()
     })
   }
 
   updateDetail(data) {
-    document.querySelector("#modal-body").innerHTML = "";
-
     var titleElement = document.querySelector("#recipeModalTitle");
     titleElement.textContent = data.title;
 
@@ -377,16 +409,26 @@ class Modal {
       bodyContent.append(noInstruction)
     }
 
-    document.querySelector("#closeModal").addEventListener("click", function () {
+    var footer = document.querySelector(".modal-footer")
+    var backButton = document.createElement("button")
+    backButton.setAttribute("type", "button")
+    backButton.setAttribute("id", "back-button")
+    backButton.setAttribute("class", "btn btn-dark btnAdj btnModal")
+    backButton.textContent = "Back"
+    footer.prepend(backButton)
+
+    document.querySelector("#close-button").addEventListener("click", function () {
       bodyElement.innerHTML = "";
       bodyElement.className = "mx-4 mb-4";
-      titleElement.textContent = "Search Result"
+      titleElement.textContent = ""
+      backButton.remove()
     })
 
     document.querySelector(".close").addEventListener("click", function () {
       bodyElement.innerHTML = "";
       bodyElement.className = "mx-4 mb-4";
-      titleElement.textContent = "Search Result"
+      titleElement.textContent = ""
+      backButton.remove()
     })
   }
 }
