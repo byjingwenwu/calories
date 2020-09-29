@@ -20,7 +20,17 @@ class App {
   }
 
   randomSearchSuccess(data) {
-    this.resultModal.updateRandomModal(data);
+    var recipe = {
+      title: data.recipes[0].title,
+      image: data.recipes[0].image,
+      cuisines: data.recipes[0].cuisines,
+      summary: data.recipes[0].summary,
+      prepTime: data.recipes[0].readyInMinutes,
+      servings: data.recipes[0].servings,
+      ingredients: data.recipes[0].extendedIngredients,
+      instruction: data.recipes[0].analyzedInstructions
+    }
+    this.resultModal.updateRandomModal(recipe);
   }
 
   randomSearchError(error) {

@@ -21,18 +21,15 @@ class NutrientForm {
       var body = document.querySelector("#modal-body")
       var error = document.createElement("h6")
       error.className = "theme-color col-12 mt-4"
-      error.textContent = "Please choose a nutrients or enter valid minimum and maximum values."
+      error.textContent = "Please choose a nutrient and enter valid minimum and maximum values."
       body.append(error)
-      document.querySelector("#moreButton").classList.add("d-none")
-      document.querySelector("#closeModal").addEventListener("click", function () {
+      document.querySelector("#close-button").addEventListener("click", function () {
         body.innerHTML = "";
-        title.textContent = "Search Result"
-        document.querySelector("#moreButton").classList.remove("d-none")
+        title.textContent = ""
       })
       document.querySelector(".close").addEventListener("click", function () {
         body.innerHTML = "";
-        title.textContent = "Search Result"
-        document.querySelector("#moreButton").classList.remove("d-none")
+        title.textContent = ""
       })
       event.stopPropagation();
     } else {
