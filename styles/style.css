@@ -246,5 +246,19 @@
 
 /* Liked list */
 .savedRecipe {
-  margin: 10px 5%;
+  margin: 10px 10%;
+}
+
+.trash {
+  cursor: pointer;
+}
+
+.trash:hover {
+  color: #5E6B73;
+}
+
+.p-title {
+  font-size: 14px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }

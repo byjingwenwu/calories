@@ -381,7 +381,7 @@ class Modal {
     serveSize.textContent = "Servings: " + data.servings;
     var dishType = document.createElement("h6");
     dishType.className = "theme-color mt-3"
-    dishType.textContent = "Dish Type: " + data.dishTypes[0];
+    dishType.textContent = "Dish Type: " + data.dishType;
 
     var cuisineTitle = document.createElement("h6");
     cuisineTitle.className = "theme-color"
