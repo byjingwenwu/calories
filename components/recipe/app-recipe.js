@@ -92,7 +92,18 @@ class App {
   }
 
   getRecipeInfoSuccess(data) {
-    this.resultModal.updateDetail(data);
+    var recipe = {
+      title: data.title,
+      image: data.image,
+      cuisines: data.cuisines,
+      summary: data.summary,
+      prepTime: data.readyInMinutes,
+      servings: data.servings,
+      ingredients: data.extendedIngredients,
+      instruction: data.analyzedInstructions,
+      dishType: data.dishTypes[0]
+    }
+    this.resultModal.updateDetail(recipe);
   }
 
   getRecipeInfoError(error) {

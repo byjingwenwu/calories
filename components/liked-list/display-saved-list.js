@@ -5,6 +5,7 @@ class ListItem {
 
   handleDelete(item) {
     localStorage.removeItem(localStorage.key(item))
+    document.querySelector("#savedRecipe").innerHTML = ""
     this.displayList()
   }
 
