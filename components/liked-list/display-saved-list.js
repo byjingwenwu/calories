@@ -17,7 +17,7 @@ class ListItem {
     for (let i = 0; i < localStorage.length; i++) {
       var data = JSON.parse(localStorage.getItem(localStorage.key(i)))
       var recipe = document.createElement("div")
-      recipe.className = "col-3 px-4 my-4"
+      recipe.className = "col-3 px-5 my-4"
       var image = document.createElement("img")
       image.setAttribute("src", data.image);
       image.className = "w-100";
