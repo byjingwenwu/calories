@@ -243,3 +243,8 @@
 .theme-color {
   color: #343a40;
 }
+
+/* Liked list */
+.savedRecipe {
+  margin: 10px 5%;
+}

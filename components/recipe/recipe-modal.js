@@ -137,7 +137,7 @@ class Modal {
     document.querySelector("#close-button").addEventListener("click", function () {
       bodyElement.innerHTML = "";
       titleElement.textContent = ""
-      if(document.querySelector("#more-button")) {
+      if (document.querySelector("#more-button")) {
         document.querySelector("#more-button").remove()
       }
     })
@@ -256,8 +256,13 @@ class Modal {
     likeButton.setAttribute("class", "far fa-heart mt-2 theme-color likeButton")
     likeButton.setAttribute("id", "likeButton")
     likeButton.addEventListener("click", function () {
-      console.log(data);
-      event.currentTarget.classList.toggle("fas")
+      var list = event.currentTarget.classList
+      list.toggle("fas")
+      if (list.contains("fas")) {
+        localStorage.setItem(data.title, JSON.stringify(data))
+      } else {
+        localStorage.removeItem(data.title)
+      }
     }, false)
     leftColumn.append(imgElement, likeButton)
     var rightColumn = document.createElement("div");
@@ -359,19 +364,36 @@ class Modal {
     likeButton.setAttribute("class", "far fa-heart mt-3 theme-color likeButton")
     likeButton.setAttribute("id", "likeButton")
     likeButton.addEventListener("click", function () {
-      console.log(data);
-      event.currentTarget.classList.toggle("fas")
+      var list = event.currentTarget.classList
+      list.toggle("fas")
+      if (list.contains("fas")) {
+        localStorage.setItem(data.title, JSON.stringify(data))
+      } else {
+        localStorage.removeItem(data.title)
+      }
     }, false)
 
     var cookingTime = document.createElement("h6");
     cookingTime.className = "theme-color mt-3"
-    cookingTime.textContent = "Ready in Minutes: " + data.readyInMinutes + " min.";
+    cookingTime.textContent = "Ready in Minutes: " + data.prepTime + " min.";
     var serveSize = document.createElement("h6");
     serveSize.className = "theme-color mt-3"
     serveSize.textContent = "Servings: " + data.servings;
     var dishType = document.createElement("h6");
     dishType.className = "theme-color mt-3"
     dishType.textContent = "Dish Type: " + data.dishTypes[0];
+
+    var cuisineTitle = document.createElement("h6");
+    cuisineTitle.className = "theme-color"
+    var cusinesName = "";
+    for (let i = 0; i < data.cuisines.length; i++) {
+      cusinesName += data.cuisines[i] + " ";
+    }
+    if (data.cuisines.length !== 0) {
+      cuisineTitle.textContent = "Cuisines: " + cusinesName;
+      bodyContent.appendChild(cuisineTitle);
+    }
+
     var summaryTitle = document.createElement("h6");
     summaryTitle.className = "theme-color mt-3"
     summaryTitle.textContent = "Summary:";
@@ -381,22 +403,22 @@ class Modal {
     extendedTitle.className = "theme-color mt-3"
     extendedTitle.textContent = "Extend Ingredients:";
     var extendedIngredients = document.createElement("ul");
-    for (let i = 0; i < data.extendedIngredients.length; i++) {
+    for (let i = 0; i < data.ingredients.length; i++) {
       var ingredients = document.createElement("li");
-      ingredients.textContent = data.extendedIngredients[i].original;
+      ingredients.textContent = data.ingredients[i].original;
       extendedIngredients.append(ingredients)
     }
 
     bodyContent.append(picture, likeButton, cookingTime, serveSize, dishType, summaryTitle, summaryElement,
       extendedTitle, extendedIngredients)
 
-    if (data.analyzedInstructions.length) {
+    if (data.instruction.length) {
       var instructionTitle = document.createElement("h6")
       instructionTitle.className = "theme-color mt-3"
       instructionTitle.textContent = "Instruction:"
       var instructions = document.createElement("ol")
-      for (let i = 0; i < data.analyzedInstructions.length; i++) {
-        data.analyzedInstructions[i].steps.map(x => {
+      for (let i = 0; i < data.instruction.length; i++) {
+        data.instruction[i].steps.map(x => {
           var item = document.createElement("li")
           item.textContent = x.step
           instructions.appendChild(item)
@@ -409,26 +431,26 @@ class Modal {
       bodyContent.append(noInstruction)
     }
 
-    var footer = document.querySelector(".modal-footer")
-    var backButton = document.createElement("button")
-    backButton.setAttribute("type", "button")
-    backButton.setAttribute("id", "back-button")
-    backButton.setAttribute("class", "btn btn-dark btnAdj btnModal")
-    backButton.textContent = "Back"
-    footer.prepend(backButton)
+    // var footer = document.querySelector(".modal-footer")
+    // var backButton = document.createElement("button")
+    // backButton.setAttribute("type", "button")
+    // backButton.setAttribute("id", "back-button")
+    // backButton.setAttribute("class", "btn btn-dark btnAdj btnModal")
+    // backButton.textContent = "Back"
+    // footer.prepend(backButton)
 
     document.querySelector("#close-button").addEventListener("click", function () {
       bodyElement.innerHTML = "";
       bodyElement.className = "mx-4 mb-4";
       titleElement.textContent = ""
-      backButton.remove()
+      // backButton.remove()
     })
 
     document.querySelector(".close").addEventListener("click", function () {
       bodyElement.innerHTML = "";
       bodyElement.className = "mx-4 mb-4";
       titleElement.textContent = ""
-      backButton.remove()
+      // backButton.remove()
     })
   }
 }
