@@ -1,4 +1,4 @@
-class SearchByLocation {
+class AppRestaurant {
   constructor(businessTable, searchForm) {
     this.businessTable = businessTable;
     this.searchForm = searchForm;
@@ -8,6 +8,7 @@ class SearchByLocation {
   }
 
   handleSearchSuccess(data) {
+    console.log(data)
     this.businessTable.updateTable(data);
   }
 
