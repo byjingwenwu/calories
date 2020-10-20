@@ -2,14 +2,15 @@ class AppRestaurant {
   constructor(businessTable, searchForm) {
     this.businessTable = businessTable;
     this.searchForm = searchForm;
+    this.result = []
     this.searchRestaurant = this.searchRestaurant.bind(this);
     this.handleSearchSuccess = this.handleSearchSuccess.bind(this);
     this.handleSearchError = this.handleSearchError.bind(this);
   }
 
   handleSearchSuccess(data) {
-    console.log(data)
-    this.businessTable.updateTable(data);
+    this.result = data.businesses
+    this.businessTable.updateTable(this.result);
   }
 
   handleSearchError(error) {

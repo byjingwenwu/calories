@@ -3,13 +3,40 @@ class Business {
     this.tableElement = tableElement
   }
 
+  loadMoreResult() {
+    var list1 = document.querySelectorAll(".display-table.d-none")
+    for (let i = 0; i < 10; i++) {
+      list1[i].classList.remove("display-table", "d-none")
+    }
+    var list2 = document.querySelectorAll(".display-table.d-none")
+    if (list2.length < 10) {
+      document.querySelector("#more-button").remove()
+    }
+  }
+
   updateTable(data) {
-    var tableElement = document.getElementById("resultBusinessTable");
-    tableElement.innerHTML = "";
+    console.log(data)
+    var body = document.getElementById("resultBar")
+    body.innerHTML = ""
+
+    if (!data.length) {
+      var noResult = document.createElement("h5");
+      noResult.textContent = "No result found.";
+      noResult.className = "mt-4";
+      body.appendChild(noResult);
+      return;
+    }
+
+    var table = document.createElement("table");
+    table.className = "table";
+    table.setAttribute("id", "resultBusinessTable")
+    body.appendChild(table)
+
     var tableHeader = document.createElement("thead");
     tableHeader.className = "thead-dark";
     var tableBody = document.createElement("tbody");
-    tableElement.append(tableHeader, tableBody);
+    table.append(tableHeader, tableBody);
+
     var tableHeaderRow = document.createElement("tr");
     tableHeader.appendChild(tableHeaderRow);
     var headerNameCell = document.createElement("th");
@@ -25,23 +52,27 @@ class Business {
     var headerPriceCell = document.createElement("th");
     headerPriceCell.textContent = "Price";
     var headerSaveCell = document.createElement("th");
-    tableHeaderRow.append(headerNameCell, headerAddressCell, headerDistanceCell, headerPhoneCell, headerRateCell, headerPriceCell, headerSaveCell)
+    tableHeader.append(headerNameCell, headerAddressCell, headerDistanceCell,
+      headerPhoneCell, headerRateCell, headerPriceCell, headerSaveCell)
 
-    for (let i = 0; i < data.businesses.length; i++) {
+    for (let i = 0; i < data.length; i++) {
       var tableBodyRow = document.createElement("tr");
       tableBody.appendChild(tableBodyRow);
+      if (i >= 10) {
+        tableBodyRow.classList.add("display-table", "d-none")
+      }
       var bodyNameCell = document.createElement("td");
-      bodyNameCell.textContent = data.businesses[i].name;
+      bodyNameCell.textContent = data[i].name;
       var bodyAddressCell = document.createElement("td");
-      bodyAddressCell.textContent = data.businesses[i].location.display_address;
+      bodyAddressCell.textContent = data[i].location.display_address;
       var bodyDistanceCell = document.createElement("td");
-      bodyDistanceCell.textContent = data.businesses[i].distance.toPrecision(2) / 1000 + " mi";
+      bodyDistanceCell.textContent = data[i].distance.toPrecision(2) / 1000 + " mi";
       var bodyPhoneCell = document.createElement("td");
-      bodyPhoneCell.textContent = data.businesses[i].phone;
+      bodyPhoneCell.textContent = data[i].phone;
       var bodyRateCell = document.createElement("td");
-      bodyRateCell.textContent = data.businesses[i].rating;
+      bodyRateCell.textContent = data[i].rating;
       var bodyPriceCell = document.createElement("td");
-      bodyPriceCell.textContent = data.businesses[i].price;
+      bodyPriceCell.textContent = data[i].price;
       var bodySaveCell = document.createElement("td");
       var bodyLikeButton = document.createElement("button");
       bodyLikeButton.className = "btn btn-outline-primary mr-3";
@@ -50,6 +81,16 @@ class Business {
       bodyLikeButton.appendChild(likeButton);
       bodySaveCell.appendChild(bodyLikeButton);
       tableBodyRow.append(bodyNameCell, bodyAddressCell, bodyDistanceCell, bodyPhoneCell, bodyRateCell, bodyPriceCell, bodySaveCell)
+    }
+
+    if (data.length > 10) {
+      var moreButton = document.createElement("button")
+      moreButton.setAttribute("type", "button")
+      moreButton.setAttribute("id", "more-button")
+      moreButton.setAttribute("class", "btn btn-dark btnAdj btnModal")
+      moreButton.textContent = "More"
+      moreButton.addEventListener("click", this.loadMoreResult)
+      body.appendChild(moreButton)
     }
   }
 }
