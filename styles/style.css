@@ -138,6 +138,14 @@
   color: white;
 }
 
+.h60 {
+  height: 60%;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
 /* Search Recipe Pages*/
 .control-form {
   display: flex;

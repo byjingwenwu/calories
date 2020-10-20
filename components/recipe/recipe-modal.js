@@ -41,7 +41,7 @@ class Modal {
       list[i].classList.remove("d-none")
     }
     var list2 = document.querySelectorAll(".modal-row.d-none")
-    if (list2.length <= 5) {
+    if (list2.length < 5) {
       document.querySelector("#more-button").remove()
     }
   }
