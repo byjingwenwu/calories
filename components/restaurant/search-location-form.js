@@ -5,15 +5,15 @@ class SearchForm {
     this.formElement.addEventListener("submit", this.handleSearch);
   }
 
-  onSubmit(searchRestaurant) {
-    this.searchRestaurant = searchRestaurant;
+  onSubmit(searchByLocation) {
+    this.searchByLocation = searchByLocation;
   }
 
   handleSearch(event) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     var location = formData.get("search-restaurant");
-    this.searchRestaurant(location);
+    this.searchByLocation(location);
     event.target.reset();
   }
 }

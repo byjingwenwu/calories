@@ -3,7 +3,7 @@ class AppRestaurant {
     this.businessTable = businessTable;
     this.searchForm = searchForm;
     this.result = []
-    this.searchRestaurant = this.searchRestaurant.bind(this);
+    this.searchByLocation = this.searchByLocation.bind(this);
     this.handleSearchSuccess = this.handleSearchSuccess.bind(this);
     this.handleSearchError = this.handleSearchError.bind(this);
   }
@@ -17,7 +17,7 @@ class AppRestaurant {
     console.log(error);
   }
 
-  searchRestaurant(location) {
+  searchByLocation(location) {
     $.ajax({
       method: "GET",
       headers: { "Authorization": yelpApiKey },
@@ -28,6 +28,6 @@ class AppRestaurant {
   }
 
   start() {
-    this.searchForm.onSubmit(this.searchRestaurant);
+    this.searchForm.onSubmit(this.searchByLocation);
   }
 }

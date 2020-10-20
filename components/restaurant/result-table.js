@@ -28,7 +28,7 @@ class Business {
     }
 
     var table = document.createElement("table");
-    table.className = "table";
+    table.className = "table table-hover";
     table.setAttribute("id", "resultBusinessTable")
     body.appendChild(table)
 
@@ -79,13 +79,15 @@ class Business {
       var bodyPriceCell = document.createElement("td");
       bodyPriceCell.textContent = data[i].price;
       var bodySaveCell = document.createElement("td");
+      bodySaveCell.classList.add("text-center")
       var bodyLikeButton = document.createElement("button");
       bodyLikeButton.className = "btn btn-outline-primary mr-3";
       var likeButton = document.createElement("i");
       likeButton.className = "far fa-heart";
       bodyLikeButton.appendChild(likeButton);
       bodySaveCell.appendChild(bodyLikeButton);
-      tableBodyRow.append(bodyNameCell, bodyAddressCell, bodyDistanceCell, bodyPhoneCell, bodyRateCell, bodyPriceCell, bodySaveCell)
+      tableBodyRow.append(bodyNameCell, bodyAddressCell, bodyDistanceCell,
+        bodyPhoneCell, bodyRateCell, bodyPriceCell, bodySaveCell)
     }
 
     if (data.length > 10) {
