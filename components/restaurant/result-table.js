@@ -4,12 +4,12 @@ class Business {
   }
 
   loadMoreResult() {
-    var list1 = document.querySelectorAll(".display-table.d-none")
+    var display = document.querySelectorAll(".display-table.d-none")
     for (let i = 0; i < 10; i++) {
-      list1[i].classList.remove("display-table", "d-none")
+      display[i].classList.remove("display-table", "d-none")
     }
-    var list2 = document.querySelectorAll(".display-table.d-none")
-    if (list2.length < 10) {
+    var rest = document.querySelectorAll(".display-table.d-none")
+    if (rest.length < 10) {
       document.querySelector("#more-button").remove()
     }
   }
@@ -41,6 +41,7 @@ class Business {
     tableHeader.appendChild(tableHeaderRow);
     var headerNameCell = document.createElement("th");
     headerNameCell.textContent = "Name";
+    headerNameCell.classList.add("pl-5")
     var headerAddressCell = document.createElement("th");
     headerAddressCell.textContent = "Address";
     var headerDistanceCell = document.createElement("th");
@@ -63,6 +64,7 @@ class Business {
       }
       var bodyNameCell = document.createElement("td");
       bodyNameCell.textContent = data[i].name;
+      bodyNameCell.classList.add("pl-5")
       var bodyAddressCell = document.createElement("td");
       bodyAddressCell.textContent = data[i].location.display_address;
       var bodyDistanceCell = document.createElement("td");
@@ -70,7 +72,10 @@ class Business {
       var bodyPhoneCell = document.createElement("td");
       bodyPhoneCell.textContent = data[i].phone;
       var bodyRateCell = document.createElement("td");
-      bodyRateCell.textContent = data[i].rating;
+      var rating = document.createElement("img")
+      rating.setAttribute("src", `../images/stars/${data[i].rating}.png`)
+      rating.classList.add("h60")
+      bodyRateCell.appendChild(rating);
       var bodyPriceCell = document.createElement("td");
       bodyPriceCell.textContent = data[i].price;
       var bodySaveCell = document.createElement("td");
@@ -87,7 +92,7 @@ class Business {
       var moreButton = document.createElement("button")
       moreButton.setAttribute("type", "button")
       moreButton.setAttribute("id", "more-button")
-      moreButton.setAttribute("class", "btn btn-dark btnAdj btnModal")
+      moreButton.setAttribute("class", "btn btn-dark btnAdj")
       moreButton.textContent = "More"
       moreButton.addEventListener("click", this.loadMoreResult)
       body.appendChild(moreButton)
