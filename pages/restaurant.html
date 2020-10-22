@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.0/css/bootstrap.css">
   <link rel="stylesheet" href="../styles/style.css">
   <title>CALORIE</title>
@@ -42,7 +43,6 @@
     <div class="restaurantSearchBar">
       <h1>Find a Restaurant</h1>
       <h6>Enter Your Location</h6>
-
       <form class="col-3 form-group justifyForm" id="searchByLocation">
         <label for="search-location-input" class="sr-only">Search</label>
         <div class="input-group">
@@ -54,19 +54,30 @@
         </div>
         <button type="submit" class="btn btn-dark btnAdj">Search</button>
       </form>
-
-      <!-- <button type="button" class="btn btn-link btn-link-1">Advanced Search<i
-          class="fa fa-angle-double-right"></i></button> -->
     </div>
-
     <div class="resultBar d-flex flex-column align-items-center" id="resultBar"></div>
+    <div class="w3-modal" id="restaurantModal">
+      <div class="w3-modal-content w3-animate-top">
+        <div class="modal-header">
+          <h4 class="modal-title ml-4" id="modalTitle"></h4>
+          <button type="button" id="controlCloseModal" class="close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div id="modal-body" class="mx-4 mb-4"></div>
+        <div class="modal-footer">
+          <button type="button" id="controlCloseModal" class="btn btn-dark btnAdj btnModal">Close</button>
+        </div>
+      </div>
+    </div>
   </main>
 
   <footer class="row justify-content-center align-items-baseline footerAdj">
     <div class="footerText">
       <h1 class="footerLogo text-right">CAloRIE</h1>
       <div class="footerLogoDec"></div>
-      <p class="text-justify">"Eating with the fullest pleasure - pleasure, that is, that does not depend on ignorance - is perhaps the
+      <p class="text-justify">"Eating with the fullest pleasure - pleasure, that is, that does not depend on ignorance -
+        is perhaps the
         profoundest
         enactment of our connection with the world. In this pleasure we experience our dependence and our gratitude, for
         we are
