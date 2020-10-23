@@ -52,9 +52,11 @@ class Business {
     headerRateCell.textContent = "Rate";
     var headerPriceCell = document.createElement("th");
     headerPriceCell.textContent = "Price";
+    var headerInfoCell = document.createElement("th");
     var headerSaveCell = document.createElement("th");
+    headerSaveCell.classList.add("pr-3")
     tableHeader.append(headerNameCell, headerAddressCell, headerDistanceCell,
-      headerPhoneCell, headerRateCell, headerPriceCell, headerSaveCell)
+      headerPhoneCell, headerRateCell, headerPriceCell, headerInfoCell, headerSaveCell)
 
     for (let i = 0; i < data.length; i++) {
       var tableBodyRow = document.createElement("tr");
@@ -78,16 +80,27 @@ class Business {
       bodyRateCell.appendChild(rating);
       var bodyPriceCell = document.createElement("td");
       bodyPriceCell.textContent = data[i].price;
+      var bodyInfoCell = document.createElement("td");
+      bodyInfoCell.classList.add("text-center")
+      var bodyInfoButton = document.createElement("button");
+      bodyInfoButton.className = "btn btn-outline-info table-button";
+      var infoButton = document.createElement("i");
+      infoButton.className = "fas fa-info";
+      bodyInfoButton.appendChild(infoButton);
+      bodyInfoButton.addEventListener("click", function(){
+        window.open(data[i].url, "modal-window", "height=700, width=700, top=100, left=100")
+      }, false)
+      bodyInfoCell.appendChild(bodyInfoButton);
       var bodySaveCell = document.createElement("td");
-      bodySaveCell.classList.add("text-center")
+      bodySaveCell.classList.add("text-center", "pr-3")
       var bodyLikeButton = document.createElement("button");
-      bodyLikeButton.className = "btn btn-outline-primary mr-3";
+      bodyLikeButton.className = "btn btn-outline-danger table-button";
       var likeButton = document.createElement("i");
       likeButton.className = "far fa-heart";
       bodyLikeButton.appendChild(likeButton);
       bodySaveCell.appendChild(bodyLikeButton);
       tableBodyRow.append(bodyNameCell, bodyAddressCell, bodyDistanceCell,
-        bodyPhoneCell, bodyRateCell, bodyPriceCell, bodySaveCell)
+        bodyPhoneCell, bodyRateCell, bodyPriceCell, bodyInfoCell, bodySaveCell)
     }
 
     if (data.length > 10) {
