@@ -146,6 +146,14 @@
   vertical-align: middle;
 }
 
+.table-button {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* Search Recipe Pages*/
 .control-form {
   display: flex;
