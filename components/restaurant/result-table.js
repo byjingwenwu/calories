@@ -3,14 +3,6 @@ class Business {
     this.tableElement = tableElement
   }
 
-  handleGetInfo(id) {
-    this.searchDetail(id)
-  }
-
-  passGetDetail(searchDetail) {
-    this.searchDetail = searchDetail
-  }
-
   loadMoreResult() {
     var display = document.querySelectorAll(".display-table.d-none")
     for (let i = 0; i < 10; i++) {
@@ -23,6 +15,7 @@ class Business {
   }
 
   updateTable(data) {
+    console.log(data)
     var body = document.getElementById("resultBar")
     body.innerHTML = ""
 
@@ -94,7 +87,9 @@ class Business {
       var infoButton = document.createElement("i");
       infoButton.className = "fas fa-info";
       bodyInfoButton.appendChild(infoButton);
-      bodyInfoButton.addEventListener("click", this.handleGetInfo.bind(this, data[i].id))
+      bodyInfoButton.addEventListener("click", function(){
+        window.open(data[i].url, "modal-window", "height=700, width=700, top=100, left=100")
+      }, false)
       bodyInfoCell.appendChild(bodyInfoButton);
       var bodySaveCell = document.createElement("td");
       bodySaveCell.classList.add("text-center", "pr-3")
