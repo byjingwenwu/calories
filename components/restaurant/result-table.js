@@ -3,6 +3,14 @@ class Business {
     this.tableElement = tableElement
   }
 
+  handleGetInfo(id) {
+    this.searchDetail(id)
+  }
+
+  passGetDetail(searchDetail) {
+    this.searchDetail = searchDetail
+  }
+
   loadMoreResult() {
     var display = document.querySelectorAll(".display-table.d-none")
     for (let i = 0; i < 10; i++) {
@@ -86,6 +94,7 @@ class Business {
       var infoButton = document.createElement("i");
       infoButton.className = "fas fa-info";
       bodyInfoButton.appendChild(infoButton);
+      bodyInfoButton.addEventListener("click", this.handleGetInfo.bind(this, data[i].id))
       bodyInfoCell.appendChild(bodyInfoButton);
       var bodySaveCell = document.createElement("td");
       bodySaveCell.classList.add("text-center", "pr-3")
