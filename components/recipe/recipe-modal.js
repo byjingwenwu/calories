@@ -15,7 +15,7 @@ class Modal {
   }
 
   handleGetMoreRandomRecipe() {
-    document.querySelector("#recipeModalTitle").textContent = ""
+    document.querySelector("#modal-title").textContent = ""
     document.querySelector("#modal-body").innerHTML = ""
     document.querySelector("#modal-body").className = "mx-4 mb-4"
     document.querySelector("#more-button").parentNode.removeChild(document.querySelector("#more-button"))
@@ -47,8 +47,10 @@ class Modal {
   }
 
   updateByIngredient(data) {
+    var modal = document.getElementById("recipeModal")
+    modal.classList.add("d-block")
     var bodyElement = document.querySelector("#modal-body");
-    var titleElement = document.querySelector("#recipeModalTitle");
+    var titleElement = document.querySelector("#modal-title");
     titleElement.textContent = "Search Result"
     var footer = document.querySelector(".modal-footer")
     var newData = this.shuffleData(data);
@@ -133,26 +135,24 @@ class Modal {
         footer.prepend(moreButton)
       }
     }
-
-    document.querySelector("#close-button").addEventListener("click", function () {
-      bodyElement.innerHTML = "";
-      titleElement.textContent = ""
-      if (document.querySelector("#more-button")) {
-        document.querySelector("#more-button").remove()
-      }
-    })
-    document.querySelector(".close").addEventListener("click", function () {
-      bodyElement.innerHTML = "";
-      titleElement.textContent = ""
-      if (document.querySelector("#more-button")) {
-        document.querySelector("#more-button").remove()
-      }
-    })
+    var closeButton = document.querySelectorAll("#control-close-modal")
+    for (let i = 0; i < closeButton.length; i++) {
+      closeButton[i].addEventListener("click", function () {
+        modal.classList.remove("d-block")
+        bodyElement.innerHTML = "";
+        titleElement.textContent = ""
+        if (document.querySelector("#more-button")) {
+          document.querySelector("#more-button").remove()
+        }
+      })
+    }
   }
 
   updateByNutrient(data, name) {
+    var modal = document.getElementById("recipeModal")
+    modal.classList.add("d-block")
     var bodyElement = document.querySelector("#modal-body");
-    var titleElement = document.querySelector("#recipeModalTitle");
+    var titleElement = document.querySelector("#modal-title");
     titleElement.textContent = "Search Result"
     var footer = document.querySelector(".modal-footer")
     var newData = this.shuffleData(data);
@@ -224,24 +224,24 @@ class Modal {
         footer.prepend(moreButton)
       }
     }
-    document.querySelector("#close-button").addEventListener("click", function () {
-      bodyElement.innerHTML = "";
-      titleElement.textContent = ""
-      if (document.querySelector("#more-button")) {
-        document.querySelector("#more-button").remove()
-      }
-    })
-    document.querySelector(".close").addEventListener("click", function () {
-      bodyElement.innerHTML = "";
-      titleElement.textContent = ""
-      if (document.querySelector("#more-button")) {
-        document.querySelector("#more-button").remove()
-      }
-    })
+    var closeButton = document.querySelectorAll("#control-close-modal")
+    for (let i = 0; i < closeButton.length; i++) {
+      closeButton[i].addEventListener("click", function () {
+        modal.classList.remove("d-block")
+        bodyElement.innerHTML = "";
+        titleElement.textContent = ""
+        if (document.querySelector("#more-button")) {
+          document.querySelector("#more-button").remove()
+        }
+      })
+    }
   }
 
   updateRandomModal(data) {
-    var titleElement = document.querySelector("#recipeModalTitle");
+    var modal = document.getElementById("recipeModal")
+    modal.classList.add("d-block")
+
+    var titleElement = document.querySelector("#modal-title");
     titleElement.textContent = data.title;
 
     var bodyElement = document.querySelector("#modal-body");
@@ -332,23 +332,20 @@ class Modal {
     moreButton.addEventListener("click", this.handleGetMoreRandomRecipe)
     footer.prepend(moreButton)
 
-    document.querySelector("#close-button").addEventListener("click", function () {
-      bodyElement.innerHTML = "";
-      bodyElement.className = "mx-4 mb-4";
-      titleElement.textContent = ""
-      moreButton.remove()
-    })
-
-    document.querySelector(".close").addEventListener("click", function () {
-      bodyElement.innerHTML = "";
-      bodyElement.className = "mx-4 mb-4";
-      titleElement.textContent = ""
-      moreButton.remove()
-    })
+    var closeButton = document.querySelectorAll("#control-close-modal")
+    for (let i = 0; i < closeButton.length; i++) {
+      closeButton[i].addEventListener("click", function () {
+        modal.classList.remove("d-block")
+        bodyElement.innerHTML = "";
+        bodyElement.className = "mx-4 mb-4";
+        titleElement.textContent = ""
+        moreButton.remove()
+      })
+    }
   }
 
   updateDetail(data) {
-    var titleElement = document.querySelector("#recipeModalTitle");
+    var titleElement = document.querySelector("#modal-title");
     titleElement.textContent = data.title;
 
     var bodyElement = document.querySelector("#modal-body");
@@ -439,18 +436,16 @@ class Modal {
     // backButton.textContent = "Back"
     // footer.prepend(backButton)
 
-    document.querySelector("#close-button").addEventListener("click", function () {
-      bodyElement.innerHTML = "";
-      bodyElement.className = "mx-4 mb-4";
-      titleElement.textContent = ""
-      // backButton.remove()
-    })
-
-    document.querySelector(".close").addEventListener("click", function () {
-      bodyElement.innerHTML = "";
-      bodyElement.className = "mx-4 mb-4";
-      titleElement.textContent = ""
-      // backButton.remove()
-    })
+    var closeButton = document.querySelectorAll("#control-close-modal")
+    for (let i = 0; i < closeButton.length; i++) {
+      closeButton[i].addEventListener("click", function () {
+        var modal = document.getElementById("recipeModal")
+        modal.classList.remove("d-block")
+        bodyElement.innerHTML = "";
+        bodyElement.className = "mx-4 mb-4";
+        titleElement.textContent = ""
+        // backButton.remove()
+      })
+    }
   }
 }

@@ -16,21 +16,23 @@ class NutrientForm {
     var min = formData.get("min-nutrient");
     var max = formData.get("max-nutrient");
     if (!name || !min || !max) {
-      var title = document.querySelector("#recipeModalTitle")
-      title.textContent = "Error"
-      var body = document.querySelector("#modal-body")
-      var error = document.createElement("h6")
-      error.className = "theme-color col-12 mt-4"
-      error.textContent = "Please choose a nutrient and enter valid minimum and maximum values."
-      body.append(error)
-      document.querySelector("#close-button").addEventListener("click", function () {
-        body.innerHTML = "";
-        title.textContent = ""
-      })
-      document.querySelector(".close").addEventListener("click", function () {
-        body.innerHTML = "";
-        title.textContent = ""
-      })
+      var modal = document.getElementById("recipeModal")
+      modal.classList.add("d-block")
+      var errorTitle = document.querySelector("#modal-title")
+      errorTitle.textContent = "Error"
+      var modalBody = document.querySelector("#modal-body")
+      var errorBody = document.createElement("h6")
+      errorBody.className = "theme-color col-12 mt-4"
+      errorBody.textContent = "Please choose a nutrient and enter valid minimum and maximum values."
+      modalBody.append(errorBody)
+      var closeButton = document.querySelectorAll("#control-close-modal")
+      for (let i = 0; i < closeButton.length; i++) {
+        closeButton[i].addEventListener("click", function () {
+          modal.classList.remove("d-block")
+          errorBody.innerHTML = "";
+          errorTitle.textContent = ""
+        })
+      }
       event.stopPropagation();
     } else {
       this.nutrientSearch(name, min, max);
