@@ -14,21 +14,23 @@ class IngredientForm {
     const formData = new FormData(event.currentTarget);
     var input = formData.get("ingredient");
     if (!input) {
-      var title = document.querySelector("#recipeModalTitle")
-      title.textContent = "Error"
-      var body = document.querySelector("#modal-body")
-      var error = document.createElement("h6")
-      error.className = "theme-color col-12 mt-4"
-      error.innerHTML = "Please enter at least one valid ingredient. <br/> For example: chicken, onion, pepper"
-      body.append(error)
-      document.querySelector("#close-button").addEventListener("click", function () {
-        body.innerHTML = "";
-        title.textContent = ""
-      })
-      document.querySelector(".close").addEventListener("click", function () {
-        body.innerHTML = "";
-        title.textContent = ""
-      })
+      var modal = document.getElementById("recipeModal")
+      modal.classList.add("d-block")
+      var errorTitle = document.querySelector("#modal-title")
+      errorTitle.textContent = "Error"
+      var modalBody = document.querySelector("#modal-body")
+      var errorBody = document.createElement("h6")
+      errorBody.className = "theme-color col-12 mt-4"
+      errorBody.innerHTML = "Please enter at least one valid ingredient. <br/> For example: chicken, onion, pepper"
+      modalBody.append(errorBody)
+      var closeButton = document.querySelectorAll("#control-close-modal")
+      for (let i = 0; i < closeButton.length; i++) {
+        closeButton[i].addEventListener("click", function () {
+          modal.classList.remove("d-block")
+          errorBody.innerHTML = "";
+          errorTitle.textContent = ""
+        })
+      }
       event.stopPropagation();
     } else {
       this.ingredientSearch(input);

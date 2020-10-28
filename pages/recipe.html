@@ -7,8 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.0/css/bootstrap.css">
   <link rel="stylesheet" href="../styles/style.css">
   <title>CALORIE</title>
 </head>
@@ -52,7 +51,7 @@
                 placeholder="EX: chicken, onion" required>
               <div class="invalid-feedback">Please enter an ingredient</div>
             </div>
-            <button type="submit" data-toggle="modal" data-target="#recipeModal" class="btn btn-dark">Search</button>
+            <button type="submit" class="btn btn-dark">Search</button>
           </div>
         </form>
 
@@ -118,16 +117,14 @@
               </div>
               <input type="text" name="max-nutrient" class="form-control" id="max-nutrient" placeholder="Max Number">
             </div>
-            <button type="submit" data-toggle="modal" data-target="#recipeModal"
-              class="btn btn-dark btnAdj">Search</button>
+            <button type="submit" class="btn btn-dark btnAdj">Search</button>
           </div>
 
         </form>
 
         <form id="getRandomRecipe" class="getRandomRecipe">
           <h4 class="textDecoration">Not sure what to eat? Let us decide for you!</h4>
-          <button type="submit" class="btn btn-dark btnRandom" data-toggle="modal" data-target="#recipeModal">Random
-            Recipe</button>
+          <button type="submit" class="btn btn-dark btnRandom">Random Recipe</button>
         </form>
       </div>
     </div>
@@ -135,14 +132,14 @@
     <div class="w3-modal" id="recipeModal">
       <div class="w3-modal-content w3-animate-top">
         <div class="modal-header">
-          <h4 class="modal-title ml-4" id="recipeModalTitle"></h4>
-          <button type="button" class="close">
-            <span aria-hidden="true">&times;</span>
+          <h4 class="modal-title ml-4" id="modal-title"></h4>
+          <button type="button" id="control-close-modal" class="close">
+            <span>&times;</span>
           </button>
         </div>
         <div id="modal-body" class="mx-4 mb-4"></div>
         <div class="modal-footer">
-          <button type="button" id="close-button" class="btn btn-dark btnAdj btnModal">Close</button>
+          <button type="button" id="control-close-modal" class="btn btn-dark btnAdj btnModal">Close</button>
         </div>
       </div>
     </div>
@@ -181,9 +178,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
   <script src="../components/config.js"></script>
   <script src="../components/recipe/app-recipe.js"></script>
