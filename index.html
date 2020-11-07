@@ -34,7 +34,7 @@
     </nav>
   </header>
 
-  <main class="col-11">
+  <main class="col-11" id="main">
     <div class="row justify-content-center rowAdj">
       <div class="col-4 backgroundPic-1"></div>
       <div class="col-6 textCenter">
@@ -65,11 +65,6 @@
       </div>
       <div class="col-4 backgroundPic-2"></div>
     </div>
-
-    <div class="w3-modal" id="contact-modal">
-      <div class="w3-modal-content w3-card-4 w3-animate-top">
-      </div>
-    </div>
   </main>
 
   <footer class="row justify-content-center align-items-baseline footerAdj">
@@ -95,14 +90,15 @@
         <li class="nav-item">
           <a class="nav-link nav-footer" href="pages/restaurant.html">RESTaurANT</a>
         </li>
-        <li class="nav-item" onclick="document.getElementById('contact-modal').classList.add('d-block')">
-          <a class="nav-link nav-footer">CONtaCT Us</a>
+        <li class="nav-item" id="contact-modal-control">
+          <div class="nav-footer">CONtaCT Us</div>
         </li>
       </ul>
     </div>
   </footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+  <script src="components/contact.js"></script>
 </body>
 
 </html>
