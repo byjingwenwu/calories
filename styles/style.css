@@ -70,6 +70,8 @@
   margin-top: 5%;
   color: white;
   background-color: #5E6B73 ;
+  position: absolute;
+  bottom: 0;
 }
 
 .footerLogo {
@@ -104,6 +106,12 @@
 .nav-footer:hover {
   color: rgb(52, 58, 64);
   cursor: pointer;
+}
+
+.min-height {
+  position: relative;
+  min-height: 100vh;
+  padding-bottom: 480px;
 }
 
 /* Restaurant Page Setting*/
