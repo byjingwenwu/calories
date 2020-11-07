@@ -13,7 +13,7 @@
   <title>CALORIE</title>
 </head>
 
-<body>
+<body class="min-height">
   <header>
     <nav class="navbar navAdj">
       <a class="navbar-brand brandLogo" href="../index.html">CAloRIE</a>
@@ -34,7 +34,7 @@
     </nav>
   </header>
 
-  <main>
+  <main id="main">
     <div class="restaurantSearchBar">
       <h1>Find a Restaurant</h1>
       <h6>Enter Your Location</h6>
@@ -92,8 +92,8 @@
         <li class="nav-item">
           <a class="nav-link nav-footer" href="#">RESTaurANT</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link nav-footer" href="">CONtaCT Us</a>
+        <li class="nav-item" id="contact-modal-control">
+          <div class="nav-footer">CONtaCT Us</div>
         </li>
       </ul>
     </div>
@@ -105,6 +105,7 @@
   <script src="../components/restaurant/result-table.js"></script>
   <script src="../components/restaurant/search-location-form.js"></script>
   <script src="../components/restaurant/main-restaurnat.js"></script>
+  <script src="../components/contact.js"></script>
 </body>
 
 </html>
